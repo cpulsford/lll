@@ -16,11 +16,6 @@
     return self;
 }
 
-- (NSArray *)reify
-{
-    return [NSArray array];
-}
-
 - (id <IPersistentList>)seq
 {
     return nil;
