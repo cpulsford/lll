@@ -67,9 +67,4 @@
     return [NSString stringWithFormat:@":%@", self.name];
 }
 
-- (id)copyWithZone:(NSZone *)zone
-{
-    return [[Keyword allocWithZone:zone] initWithName:self.name];
-}
-
 @end
