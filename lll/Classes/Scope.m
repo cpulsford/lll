@@ -8,6 +8,7 @@
 
 #import "Scope.h"
 #import "Symbol.h"
+#import "Exception.h"
 
 @implementation Scope
 
@@ -15,11 +16,11 @@
 @synthesize parentScope = parentScope_;
 @synthesize root        = rootScope_;
 
-static Scope *GLOBALSCOPE;
+static Scope *GLOBAL;
 
 + (void)initialize
 {
-    GLOBALSCOPE = [[Scope alloc] init];
+    GLOBAL = [[Scope alloc] init];
 }
 
 - (void)dealloc
@@ -62,10 +63,8 @@ static Scope *GLOBALSCOPE;
 + (id)scopeWithParentScope:(Scope *)parentScope
                  andValues:(NSArray *)values
                 forSymbols:(NSArray *)symbols
-                isTailCall:(BOOL)isTailCall
 {
-    // if we are a tail call, reuse the current scope
-    Scope *newScope = isTailCall ? self : [Scope scopeWithParentScope:parentScope];
+    Scope *newScope = [Scope scopeWithParentScope:parentScope];
     
     [newScope setValues:values forSymbols:symbols allowOverwriting:YES];
     
@@ -74,7 +73,7 @@ static Scope *GLOBALSCOPE;
 
 - (id)rootScope
 {
-    return GLOBALSCOPE;
+    return GLOBAL;
 }
 
 - (id)valueForSymbol:(Symbol *)symbol
@@ -88,9 +87,7 @@ static Scope *GLOBALSCOPE;
     }
     
     if (!retValue) {
-        @throw [NSException exceptionWithName:@"Invalid Symbol Exception"
-                                       reason:[NSString stringWithFormat:@"'%@' is not bound in this scope", symbol]
-                                     userInfo:nil];
+        RAISE_ERROR(IMMUTABLESTATE_EXCEPTION, @"'%@' is not bound in this scope", symbol);
     }
     
     return retValue;
@@ -102,9 +99,7 @@ allowOverwriting:(BOOL)allowOverwriting
 {
     if (!allowOverwriting) {
         if ([self.localVars objectForKey:[symbol name]]) {
-            @throw [NSException exceptionWithName:@"Immutable Scope Exception"
-                                           reason:[NSString stringWithFormat:@"'%@' is already bound in this scope", symbol]
-                                         userInfo:nil];
+            RAISE_ERROR(IMMUTABLESTATE_EXCEPTION, @"'%@' is already bound in this scope", symbol);
         }
     }
 
@@ -117,8 +112,6 @@ allowOverwriting:(BOOL)allowOverwriting
  allowOverwriting:(BOOL)allowOverwriting
 {
     NSUInteger i, length;
-    
-    //TODO optimize this for persistentlists instead
     
     for (i = 0, length = [values count]; i < length; i++) {
         [self setValue:[values objectAtIndex:i] forSymbol:[symbols objectAtIndex:i] allowOverwriting:allowOverwriting];

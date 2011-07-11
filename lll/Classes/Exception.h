@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-
 #define RAISE_ERROR(ll, s, ...) @throw [NSException exceptionWithName:(ll) reason:[NSString stringWithFormat:(s), ##__VA_ARGS__] userInfo:nil]
 
-
-//#define IMMUTABLESTATE_EXCEPTION (@"Immutable State Exception")
-//
-//#define SYMBOL_EXCEPTION          (@"Invalid Symbol Exception")
-
 #define UNSUPPORTEDOPERATION_EXCEPTION (@"Unsupported Operation Exception")
+
+#define INDEXOUTOFBOUNDS_EXCEPTION     (@"Index Out of Bounds Exception")
+
+#define IMMUTABLESTATE_EXCEPTION       (@"Immutable State Exception")

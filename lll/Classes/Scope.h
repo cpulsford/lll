@@ -31,8 +31,7 @@
 
 + (id)scopeWithParentScope:(Scope *)parentScope
                  andValues:(NSArray *)values
-                forSymbols:(NSArray *)symbols
-                isTailCall:(BOOL)isTailCall;
+                forSymbols:(NSArray *)symbols;
 
 - (id)rootScope;
 
