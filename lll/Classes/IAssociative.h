@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol IAssosciative <NSObject>
+@protocol IAssociative <NSObject>
 
 - (id)valueForKey:(id)key;
 

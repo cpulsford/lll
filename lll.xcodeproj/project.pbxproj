@@ -57,7 +57,7 @@
 		1E1D90BA13CA9D9C0097DB51 /* ISequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISequence.h; path = Classes/ISequence.h; sourceTree = "<group>"; };
 		1E1D90BB13CAA0230097DB51 /* IPersistentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPersistentList.h; path = Classes/IPersistentList.h; sourceTree = "<group>"; };
 		1E1D90BC13CAA0CB0097DB51 /* ICounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICounted.h; path = Classes/ICounted.h; sourceTree = "<group>"; };
-		1E1D90BD13CAA1160097DB51 /* IAssosciative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAssosciative.h; path = Classes/IAssosciative.h; sourceTree = "<group>"; };
+		1E1D90BD13CAA1160097DB51 /* IAssociative.h */ = {isa = PBXFileReference; fileEncoding = 4; name = IAssociative.h; path = Classes/IAssociative.h; sourceTree = "<group>"; };
 		1E1D90BE13CAA26B0097DB51 /* PersistentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersistentList.h; path = Classes/PersistentList.h; sourceTree = "<group>"; };
 		1E1D90BF13CAA26C0097DB51 /* PersistentList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersistentList.m; path = Classes/PersistentList.m; sourceTree = "<group>"; };
 		1E1D90C913CAA7910097DB51 /* AbstractSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbstractSequence.h; path = Classes/AbstractSequence.h; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 			children = (
 				1E1D90BA13CA9D9C0097DB51 /* ISequence.h */,
 				1E1D90BC13CAA0CB0097DB51 /* ICounted.h */,
-				1E1D90BD13CAA1160097DB51 /* IAssosciative.h */,
+				1E1D90BD13CAA1160097DB51 /* IAssociative.h */,
 				1E1D90BB13CAA0230097DB51 /* IPersistentList.h */,
 			);
 			name = Protocols;

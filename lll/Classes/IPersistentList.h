@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ISequence.h"
 #import "ICounted.h"
-#import "IAssosciative.h"
+#import "IAssociative.h"
 
-@protocol IPersistentList <ISequence, ICounted, IAssosciative>
+@protocol IPersistentList <ISequence, ICounted, IAssociative>
 @end
