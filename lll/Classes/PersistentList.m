@@ -54,11 +54,16 @@
 
 @implementation PersistentList
 
-static EmptyList *EMPTY;
-
 @synthesize first = first_;
 @synthesize tail  = tail_;
 @synthesize count = count_;
+
+static EmptyList *EMPTY;
+
++ (void)initialize
+{
+    EMPTY = [[EmptyList alloc] init];
+}
 
 - (void)dealloc
 {
@@ -67,22 +72,6 @@ static EmptyList *EMPTY;
     [tail_ release];
     
     [super dealloc];
-}
-
-+ (void)initialize
-{
-    EMPTY = [[EmptyList alloc] init];
-}
-
-- (id)init
-{
-    if ((self = [super init])) {
-        first_ = nil;
-        tail_  = nil;
-        count_ = 0;
-    }
-    
-    return self;
 }
 
 - (id)initWithFirst:(id)first tail:(id <IPersistentList>)tail count:(NSUInteger)count

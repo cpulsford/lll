@@ -8,12 +8,11 @@
 
 #import "Symbol.h"
 
-
 @implementation Symbol
 
-static Class SELFCLASS;
-
 @synthesize name = name_;
+
+static Class SELFCLASS;
 
 + (void)initialize
 {
@@ -52,6 +51,7 @@ static Class SELFCLASS;
         return YES;
     }
     
+    // symbols and keywords are never equal
     if (SELFCLASS == [object class]) {
         return [self.name isEqualToString:[(Symbol *)object name]];
     }
