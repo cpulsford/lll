@@ -19,7 +19,7 @@
 
 + (id <ISequence>)empty
 {
-    return [PersistentList empty];
+    RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", __FUNCTION__);
 }
 
 + (id <ISequence>)createFromArray:(NSArray *)array
@@ -50,7 +50,7 @@
 
 - (id <ISequence>)seq
 {
-    return self;
+    RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", __FUNCTION__);
 }
 
 - (id)first
