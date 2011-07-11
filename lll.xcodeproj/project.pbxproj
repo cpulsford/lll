@@ -18,6 +18,10 @@
 		1E1D90AC13CA9D2C0097DB51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E1D90AA13CA9D2C0097DB51 /* InfoPlist.strings */; };
 		1E1D90AE13CA9D2C0097DB51 /* lllTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1E1D90AD13CA9D2C0097DB51 /* lllTests.h */; };
 		1E1D90B013CA9D2C0097DB51 /* lllTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90AF13CA9D2C0097DB51 /* lllTests.m */; };
+		1E1D90C013CAA26C0097DB51 /* PersistentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90BF13CAA26C0097DB51 /* PersistentList.m */; };
+		1E1D90CB13CAA7910097DB51 /* AbstractSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90CA13CAA7910097DB51 /* AbstractSequence.m */; };
+		1E1D90E213CABE4B0097DB51 /* Symbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90E113CABE4B0097DB51 /* Symbol.m */; };
+		1E1D90E513CAC0150097DB51 /* Scope.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90E413CAC0150097DB51 /* Scope.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,20 +40,33 @@
 		1E1D908713CA9D2C0097DB51 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		1E1D908813CA9D2C0097DB51 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1E1D908913CA9D2C0097DB51 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1E1D908C13CA9D2C0097DB51 /* lll-Info.plist */ = {isa = PBXFileReference; path = "lll-Info.plist"; sourceTree = "<group>"; };
+		1E1D908C13CA9D2C0097DB51 /* lll-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "lll-Info.plist"; sourceTree = "<group>"; };
 		1E1D908E13CA9D2C0097DB51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1E1D909013CA9D2C0097DB51 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1E1D909213CA9D2C0097DB51 /* lll-Prefix.pch */ = {isa = PBXFileReference; path = "lll-Prefix.pch"; sourceTree = "<group>"; };
+		1E1D909213CA9D2C0097DB51 /* lll-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lll-Prefix.pch"; sourceTree = "<group>"; };
 		1E1D909413CA9D2C0097DB51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		1E1D909613CA9D2C0097DB51 /* lllAppDelegate.h */ = {isa = PBXFileReference; path = lllAppDelegate.h; sourceTree = "<group>"; };
+		1E1D909613CA9D2C0097DB51 /* lllAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lllAppDelegate.h; sourceTree = "<group>"; };
 		1E1D909713CA9D2C0097DB51 /* lllAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lllAppDelegate.m; sourceTree = "<group>"; };
 		1E1D909A13CA9D2C0097DB51 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		1E1D90A113CA9D2C0097DB51 /* lllTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lllTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E1D90A213CA9D2C0097DB51 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		1E1D90A913CA9D2C0097DB51 /* lllTests-Info.plist */ = {isa = PBXFileReference; path = "lllTests-Info.plist"; sourceTree = "<group>"; };
+		1E1D90A913CA9D2C0097DB51 /* lllTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "lllTests-Info.plist"; sourceTree = "<group>"; };
 		1E1D90AB13CA9D2C0097DB51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1E1D90AD13CA9D2C0097DB51 /* lllTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lllTests.h; sourceTree = "<group>"; };
 		1E1D90AF13CA9D2C0097DB51 /* lllTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lllTests.m; sourceTree = "<group>"; };
+		1E1D90BA13CA9D9C0097DB51 /* ISequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISequence.h; path = Classes/ISequence.h; sourceTree = "<group>"; };
+		1E1D90BB13CAA0230097DB51 /* IPersistentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPersistentList.h; path = Classes/IPersistentList.h; sourceTree = "<group>"; };
+		1E1D90BC13CAA0CB0097DB51 /* ICounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICounted.h; path = Classes/ICounted.h; sourceTree = "<group>"; };
+		1E1D90BD13CAA1160097DB51 /* IAssosciative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAssosciative.h; path = Classes/IAssosciative.h; sourceTree = "<group>"; };
+		1E1D90BE13CAA26B0097DB51 /* PersistentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersistentList.h; path = Classes/PersistentList.h; sourceTree = "<group>"; };
+		1E1D90BF13CAA26C0097DB51 /* PersistentList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersistentList.m; path = Classes/PersistentList.m; sourceTree = "<group>"; };
+		1E1D90C913CAA7910097DB51 /* AbstractSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbstractSequence.h; path = Classes/AbstractSequence.h; sourceTree = "<group>"; };
+		1E1D90CA13CAA7910097DB51 /* AbstractSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AbstractSequence.m; path = Classes/AbstractSequence.m; sourceTree = "<group>"; };
+		1E1D90E013CABE4B0097DB51 /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Symbol.h; path = Classes/Symbol.h; sourceTree = "<group>"; };
+		1E1D90E113CABE4B0097DB51 /* Symbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Symbol.m; path = Classes/Symbol.m; sourceTree = "<group>"; };
+		1E1D90E313CAC0140097DB51 /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scope.h; path = Classes/Scope.h; sourceTree = "<group>"; };
+		1E1D90E413CAC0150097DB51 /* Scope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scope.m; path = Classes/Scope.m; sourceTree = "<group>"; };
+		1E1D90E613CAC39D0097DB51 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = Classes/Exception.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +132,7 @@
 		1E1D908A13CA9D2C0097DB51 /* lll */ = {
 			isa = PBXGroup;
 			children = (
+				1E1D90B913CA9D380097DB51 /* Classes */,
 				1E1D909613CA9D2C0097DB51 /* lllAppDelegate.h */,
 				1E1D909713CA9D2C0097DB51 /* lllAppDelegate.m */,
 				1E1D909913CA9D2C0097DB51 /* MainMenu.xib */,
@@ -152,6 +170,42 @@
 				1E1D90AA13CA9D2C0097DB51 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1E1D90B913CA9D380097DB51 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1E1D90E713CAC6760097DB51 /* Data Structures */,
+				1E1D90E613CAC39D0097DB51 /* Exception.h */,
+				1E1D90E313CAC0140097DB51 /* Scope.h */,
+				1E1D90E413CAC0150097DB51 /* Scope.m */,
+				1E1D90E013CABE4B0097DB51 /* Symbol.h */,
+				1E1D90E113CABE4B0097DB51 /* Symbol.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1E1D90E713CAC6760097DB51 /* Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				1E1D90E813CAC69E0097DB51 /* Protocols */,
+				1E1D90C913CAA7910097DB51 /* AbstractSequence.h */,
+				1E1D90CA13CAA7910097DB51 /* AbstractSequence.m */,
+				1E1D90BE13CAA26B0097DB51 /* PersistentList.h */,
+				1E1D90BF13CAA26C0097DB51 /* PersistentList.m */,
+			);
+			name = "Data Structures";
+			sourceTree = "<group>";
+		};
+		1E1D90E813CAC69E0097DB51 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1E1D90BA13CA9D9C0097DB51 /* ISequence.h */,
+				1E1D90BC13CAA0CB0097DB51 /* ICounted.h */,
+				1E1D90BD13CAA1160097DB51 /* IAssosciative.h */,
+				1E1D90BB13CAA0230097DB51 /* IPersistentList.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +315,10 @@
 			files = (
 				1E1D909113CA9D2C0097DB51 /* main.m in Sources */,
 				1E1D909813CA9D2C0097DB51 /* lllAppDelegate.m in Sources */,
+				1E1D90C013CAA26C0097DB51 /* PersistentList.m in Sources */,
+				1E1D90CB13CAA7910097DB51 /* AbstractSequence.m in Sources */,
+				1E1D90E213CABE4B0097DB51 /* Symbol.m in Sources */,
+				1E1D90E513CAC0150097DB51 /* Scope.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +426,7 @@
 		1E1D90B413CA9D2C0097DB51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lll/lll-Prefix.pch";
 				INFOPLIST_FILE = "lll/lll-Info.plist";
@@ -379,6 +438,7 @@
 		1E1D90B513CA9D2C0097DB51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lll/lll-Prefix.pch";
 				INFOPLIST_FILE = "lll/lll-Info.plist";
@@ -434,6 +494,7 @@
 				1E1D90B513CA9D2C0097DB51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1E1D90B613CA9D2C0097DB51 /* Build configuration list for PBXNativeTarget "lllTests" */ = {
 			isa = XCConfigurationList;
@@ -442,6 +503,7 @@
 				1E1D90B813CA9D2C0097DB51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
