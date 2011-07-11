@@ -12,13 +12,6 @@
 
 @synthesize name = name_;
 
-static Class SELFCLASS;
-
-+ (void)initialize
-{
-    SELFCLASS = [self class];
-}
-
 - (void)dealloc
 {
     [name_ release];
@@ -45,6 +38,11 @@ static Class SELFCLASS;
     return [NSString stringWithFormat:@"'%@", self.name];
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    return [[[self class] alloc] initWithName:[[self.name copyWithZone:zone] autorelease]];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if (self == object) {
@@ -52,7 +50,7 @@ static Class SELFCLASS;
     }
     
     // symbols and keywords are never equal
-    if (SELFCLASS == [object class]) {
+    if ([self class] == [object class]) {
         return [self.name isEqualToString:[(Symbol *)object name]];
     }
     
@@ -67,6 +65,11 @@ static Class SELFCLASS;
 - (NSString *)description
 {
     return [NSString stringWithFormat:@":%@", self.name];
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return [[Keyword allocWithZone:zone] initWithName:self.name];
 }
 
 @end

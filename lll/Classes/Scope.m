@@ -80,7 +80,7 @@ static Scope *GLOBAL;
 {
     id retValue;
     
-    retValue = [self.localVars objectForKey:[symbol name]];
+    retValue = [self.localVars objectForKey:symbol];
     
     if (!retValue) {
         retValue = [self.parentScope valueForSymbol:symbol];
