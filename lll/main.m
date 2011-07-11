@@ -7,8 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "Symbol.h"
 int main(int argc, char *argv[])
 {
-    return NSApplicationMain(argc, (const char **)argv);
+    @autoreleasepool {
+        NSMutableDictionary *d = [NSMutableDictionary dictionary];
+        
+        [d setObject:@"hello" forKey:[Symbol withName:@"what up"]];
+        
+        NSLog(@"%@", d);
+        
+        NSLog(@"%@", [d objectForKey:[Keyword withName:@"what up"]]);
+        
+    }
+    
+    return 0;
 }
