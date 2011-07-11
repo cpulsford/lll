@@ -63,14 +63,14 @@ static Scope *GLOBAL;
                  andValues:(NSArray *)values
                 forSymbols:(NSArray *)symbols
 {
-    Scope *newScope = [Scope scopeWithParentScope:parentScope];
+    id newScope = [self scopeWithParentScope:parentScope];
     
     [newScope setValues:values forSymbols:symbols allowOverwriting:YES];
     
     return newScope;
 }
 
-- (id)rootScope
++ (id)rootScope
 {
     return GLOBAL;
 }

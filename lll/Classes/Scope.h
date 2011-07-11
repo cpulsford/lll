@@ -30,7 +30,7 @@
                  andValues:(NSArray *)values
                 forSymbols:(NSArray *)symbols;
 
-- (id)rootScope;
++ (id)rootScope;
 
 - (id)valueForSymbol:(Symbol *)symbol;
 
