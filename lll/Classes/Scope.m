@@ -102,7 +102,7 @@ allowOverwriting:(BOOL)allowOverwriting
         }
     }
 
-    [self.localVars setObject:(value ? value : nil)
+    [self.localVars setObject:(value ? value : [NSNull null])
                        forKey:[symbol name]];
 }
 
