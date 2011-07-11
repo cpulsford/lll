@@ -113,7 +113,9 @@ allowOverwriting:(BOOL)allowOverwriting
     NSUInteger i, length;
     
     for (i = 0, length = [values count]; i < length; i++) {
-        [self setValue:[values objectAtIndex:i] forSymbol:[symbols objectAtIndex:i] allowOverwriting:allowOverwriting];
+        [self setValue:[values objectAtIndex:i]
+             forSymbol:[symbols objectAtIndex:i]
+      allowOverwriting:allowOverwriting];
     }
 }
 
