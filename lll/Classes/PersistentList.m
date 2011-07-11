@@ -7,6 +7,7 @@
 //
 
 #import "PersistentList.h"
+#import "Exception.h"
 
 @implementation EmptyList
 
@@ -123,7 +124,7 @@ static EmptyList *EMPTY;
 - (id)nth:(NSInteger)n
 {
     if (n >= count_ || n < 0) {
-        @throw [NSException exceptionWithName:@"Index out of bounds" reason:nil userInfo:nil];
+        RAISE_ERROR(INDEXOUTOFBOUNDS_EXCEPTION, @"%ld is out of range %ul", n, [self count]);
     }
     
     id <ISequence> s;
