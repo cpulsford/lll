@@ -14,7 +14,6 @@
 
 @synthesize localVars   = localVars_;
 @synthesize parentScope = parentScope_;
-@synthesize root        = rootScope_;
 
 static Scope *GLOBAL;
 

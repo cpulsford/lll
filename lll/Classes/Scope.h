@@ -14,14 +14,11 @@
 {
     NSMutableDictionary *localVars_;
     
-    Scope *parentScope_;
-    
-    Scope *rootScope_;
+    Scope *parentScope_;    
 }
 
 @property (readonly) NSMutableDictionary *localVars;
 @property (readonly) Scope               *parentScope;
-@property (readonly) Scope               *root;
 
 - (id)initWithParentScope:(Scope *)parentScope;
 
