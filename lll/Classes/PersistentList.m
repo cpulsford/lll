@@ -108,7 +108,7 @@ static EmptyList *EMPTY;
 
 - (id <IPersistentList>)seq
 {
-    return count_ > 0 ? self : nil;
+    return self;
 }
 
 - (id <IPersistentList>)next
@@ -137,7 +137,7 @@ static EmptyList *EMPTY;
         @throw [NSException exceptionWithName:@"Index out of bounds" reason:nil userInfo:nil];
     }
     
-    id <IPersistentList> s;
+    id <ISequence> s;
     
     NSInteger i;
     
