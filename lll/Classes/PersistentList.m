@@ -50,10 +50,6 @@
 
 @implementation PersistentList
 
-@synthesize first = first_;
-@synthesize tail  = tail_;
-@synthesize count = count_;
-
 static EmptyList *EMPTY;
 
 + (void)initialize
@@ -91,9 +87,9 @@ static EmptyList *EMPTY;
     return EMPTY;
 }
 
-- (id <IPersistentList>)seq
+- (id)first
 {
-    return self;
+	return first_;
 }
 
 - (id <IPersistentList>)next
@@ -109,6 +105,11 @@ static EmptyList *EMPTY;
 - (id <IPersistentList>)cons:(id)value
 {
     return [PersistentList persistentListWithFirst:value tail:self count:count_ + 1];
+}
+
+- (NSUInteger)count
+{
+	return count_;
 }
 
 - (id)valueForKey:(id)key

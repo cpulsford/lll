@@ -21,10 +21,6 @@
     NSUInteger count_;
 }
 
-@property (nonatomic, readonly) id                  first;
-@property (nonatomic, readonly) id<IPersistentList> tail;
-@property (nonatomic, readonly) NSUInteger          count;
-
 - (id)initWithFirst:(id)first tail:(id <IPersistentList>)tail count:(NSUInteger)count;
 
 + (id)persistentListWithFirst:(id)first tail:(id <IPersistentList>)tail count:(NSUInteger)count;

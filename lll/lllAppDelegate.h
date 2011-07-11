@@ -8,10 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface lllAppDelegate : NSObject <NSApplicationDelegate> {
+@interface lllAppDelegate : NSObject {
     NSWindow *_window;
 }
 
-@property (strong) IBOutlet NSWindow *window;
+@property (retain) IBOutlet NSWindow *window;
 
 @end

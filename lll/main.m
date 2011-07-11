@@ -10,16 +10,17 @@
 #import "Symbol.h"
 int main(int argc, char *argv[])
 {
-    @autoreleasepool {
-        NSMutableDictionary *d = [NSMutableDictionary dictionary];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
+	NSMutableDictionary *d = [NSMutableDictionary dictionary];
+	
+	[d setObject:@"hello" forKey:[Symbol withName:@"what up"]];
+	
+	NSLog(@"%@", d);
+	
+	NSLog(@"%@", [d objectForKey:[Symbol withName:@"what up"]]);
         
-        [d setObject:@"hello" forKey:[Symbol withName:@"what up"]];
-        
-        NSLog(@"%@", d);
-        
-        NSLog(@"%@", [d objectForKey:[Keyword withName:@"what up"]]);
-        
-    }
+    [pool release];
     
     return 0;
 }
