@@ -40,6 +40,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
+    // FIXME: this is broken I think
     return [[[self class] alloc] initWithName:[[self.name copyWithZone:zone] autorelease]];
 }
 
