@@ -9,52 +9,13 @@
 #import "PersistentList.h"
 #import "Exception.h"
 
-@implementation EmptyList
-
-- (id <IPersistentList>)empty
-{
-    return self;
-}
-
-- (id <IPersistentList>)seq
-{
-    return nil;
-}
-
-- (id)first
-{
-    return nil;
-}
-
-- (id <IPersistentList>)next
-{
-    return nil;
-}
-
-- (id <IPersistentList>)more
-{
-    return self;
-}
-
-- (id <IPersistentList>)cons:(id)value
-{
-    return [PersistentList persistentListWithFirst:value tail:self count:1];
-}
-
-- (NSUInteger)count
-{
-    return 0;
-}
-
-@end
-
 @implementation PersistentList
-
-static EmptyList *EMPTY;
-
-+ (void)initialize
 {
-    EMPTY = [[EmptyList alloc] init];
+    id first_;
+    
+    id <IPersistentList> tail_;
+    
+    NSUInteger count_;
 }
 
 - (void)dealloc
@@ -82,9 +43,17 @@ static EmptyList *EMPTY;
     return [[[self alloc] initWithFirst:first tail:tail count:count] autorelease];
 }
 
-+ (id <IPersistentList>)empty
++ (id <ISequence>)empty
 {
-    return EMPTY;
+    static dispatch_once_t pred;
+    
+    static EmptyList *shared = nil;
+    
+    dispatch_once(&pred, ^{
+        shared = [[EmptyList alloc] init];
+    });
+    
+    return shared;
 }
 
 - (id)first
@@ -92,17 +61,17 @@ static EmptyList *EMPTY;
 	return first_;
 }
 
-- (id <IPersistentList>)next
+- (id <ISequence>)next
 {
     return count_ == 1 ? nil : tail_;
 }
 
-- (id <IPersistentList>)more
+- (id <ISequence>)more
 {
-    return count_ == 1 ? EMPTY : tail_;
+    return count_ == 1 ? [PersistentList empty] : tail_;
 }
 
-- (id <IPersistentList>)cons:(id)value
+- (id <ISequence>)cons:(id)value
 {
     return [PersistentList persistentListWithFirst:value tail:self count:count_ + 1];
 }
@@ -130,6 +99,45 @@ static EmptyList *EMPTY;
     for (i = 0, s = self; i < n; i++, s = [s more]);
     
     return [s first];
+}
+
+@end
+
+@implementation EmptyList
+
+- (id <ISequence>)empty
+{
+    return self;
+}
+
+- (id <ISequence>)seq
+{
+    return nil;
+}
+
+- (id)first
+{
+    return nil;
+}
+
+- (id <ISequence>)next
+{
+    return nil;
+}
+
+- (id <ISequence>)more
+{
+    return self;
+}
+
+- (id <ISequence>)cons:(id)value
+{
+    return [PersistentList persistentListWithFirst:value tail:self count:1];
+}
+
+- (NSUInteger)count
+{
+    return 0;
 }
 
 @end

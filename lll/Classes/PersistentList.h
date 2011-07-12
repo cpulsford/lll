@@ -13,16 +13,4 @@
 @end
 
 @interface PersistentList : AbstractSequence <IPersistentList>
-{
-    id first_;
-    
-    id <IPersistentList> tail_;
-    
-    NSUInteger count_;
-}
-
-- (id)initWithFirst:(id)first tail:(id <IPersistentList>)tail count:(NSUInteger)count;
-
-+ (id)persistentListWithFirst:(id)first tail:(id <IPersistentList>)tail count:(NSUInteger)count;
-
 @end
