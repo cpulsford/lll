@@ -19,6 +19,11 @@
     [super dealloc];
 }
 
+- (NSUInteger)hash
+{
+    return [self.name hash];
+}
+
 - (id)initWithName:(NSString *)name
 {
     if ((self = [super init])) {
@@ -40,8 +45,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    // FIXME: this is broken I think
-    return [[[self class] alloc] initWithName:[[self.name copyWithZone:zone] autorelease]];
+    return [[[self class] allocWithZone:zone] initWithName:self.name]; // copy name shallowly
 }
 
 - (BOOL)isEqual:(id)object
