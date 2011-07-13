@@ -7,7 +7,7 @@
 //
 
 #import "PersistentList.h"
-#import "Exception.h"
+#import "Utils.h"
 
 @implementation PersistentList
 {
@@ -49,9 +49,7 @@
     
     static EmptyList *shared = nil;
     
-    dispatch_once(&pred, ^{
-        shared = [[EmptyList alloc] init];
-    });
+    dispatch_once(&pred, ^{ shared = [[EmptyList alloc] init]; });
     
     return shared;
 }
@@ -88,9 +86,7 @@
 
 - (id)nth:(NSInteger)n
 {
-    if (n >= count_ || n < 0) {
-        RAISE_ERROR(INDEXOUTOFBOUNDS_EXCEPTION, @"%ld is out of range %ul", n, [self count]);
-    }
+    checkRange(n, [self count]);
     
     id <ISequence> s;
     
