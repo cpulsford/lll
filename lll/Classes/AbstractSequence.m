@@ -8,18 +8,13 @@
 
 #import "AbstractSequence.h"
 #import "PersistentList.h"
-#import "Exception.h"
+#import "Utils.h"
 
 @implementation AbstractSequence
 
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"(%@)", [[self reify] componentsJoinedByString:@" "]];
-}
-
-+ (id <ISequence>)empty
-{
-    RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", __FUNCTION__);
 }
 
 + (id <ISequence>)createFromArray:(NSArray *)array
@@ -53,24 +48,29 @@
     return self;
 }
 
++ (id <ISequence>)empty
+{
+    unsupportedOperation(__FUNCTION__);
+}
+
 - (id)first
 {
-    RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", __FUNCTION__);
+    unsupportedOperation(__FUNCTION__);
 }
 
 - (id <ISequence>)next
 {
-   RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", __FUNCTION__); 
+    unsupportedOperation(__FUNCTION__);
 }
 
 - (id <ISequence>)more
 {
-    RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", __FUNCTION__);
+    unsupportedOperation(__FUNCTION__);
 }
 
 - (id <ISequence>)cons:(id)value
 {
-    RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", __FUNCTION__);
+    unsupportedOperation(__FUNCTION__);
 }
 
 @end

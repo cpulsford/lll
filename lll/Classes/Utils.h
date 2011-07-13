@@ -7,5 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Exception.h"
+
+#define unsupportedOperation(functionName) {RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", functionName);}
 
 void checkRange(NSInteger n, NSInteger count);
