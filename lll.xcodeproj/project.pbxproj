@@ -22,6 +22,7 @@
 		1E1D90CB13CAA7910097DB51 /* AbstractSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90CA13CAA7910097DB51 /* AbstractSequence.m */; };
 		1E1D90E213CABE4B0097DB51 /* Symbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90E113CABE4B0097DB51 /* Symbol.m */; };
 		1E1D90E513CAC0150097DB51 /* Scope.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90E413CAC0150097DB51 /* Scope.m */; };
+		1E7ED63113CD4A6E0085A00B /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7ED63013CD4A6E0085A00B /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		1E1D90E313CAC0140097DB51 /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scope.h; path = Classes/Scope.h; sourceTree = "<group>"; };
 		1E1D90E413CAC0150097DB51 /* Scope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scope.m; path = Classes/Scope.m; sourceTree = "<group>"; };
 		1E1D90E613CAC39D0097DB51 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = Classes/Exception.h; sourceTree = "<group>"; };
+		1E7ED62F13CD4A6E0085A00B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Classes/Utils.h; sourceTree = "<group>"; };
+		1E7ED63013CD4A6E0085A00B /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = Classes/Utils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,8 @@
 				1E1D90E413CAC0150097DB51 /* Scope.m */,
 				1E1D90E013CABE4B0097DB51 /* Symbol.h */,
 				1E1D90E113CABE4B0097DB51 /* Symbol.m */,
+				1E7ED62F13CD4A6E0085A00B /* Utils.h */,
+				1E7ED63013CD4A6E0085A00B /* Utils.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -252,6 +257,9 @@
 /* Begin PBXProject section */
 		1E1D907713CA9D2C0097DB51 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 1E1D907A13CA9D2C0097DB51 /* Build configuration list for PBXProject "lll" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -319,6 +327,7 @@
 				1E1D90CB13CAA7910097DB51 /* AbstractSequence.m in Sources */,
 				1E1D90E213CABE4B0097DB51 /* Symbol.m in Sources */,
 				1E1D90E513CAC0150097DB51 /* Scope.m in Sources */,
+				1E7ED63113CD4A6E0085A00B /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,8 +389,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -399,7 +408,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -407,8 +416,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -419,7 +428,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				SDKROOT = macosx10.5;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
