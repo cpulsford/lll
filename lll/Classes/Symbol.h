@@ -9,15 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface Symbol : NSObject <NSCopying>
-{
-    NSString *name_;
-}
-
-@property (readonly) NSString *name;
-
-- (id)initWithName:(NSString *)name;
 
 + (id)withName:(NSString *)name;
+
+- (NSString *)name;
 
 @end
 

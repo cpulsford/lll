@@ -12,8 +12,9 @@
 #define KEYWORD_HASH_OFFSET 1
 
 @implementation Symbol
-
-@synthesize name = name_;
+{
+    NSString *name_;
+}
 
 - (void)dealloc
 {
@@ -25,6 +26,17 @@
 - (NSUInteger)hash
 {
     return [self.name hash] + SYMBOL_HASH_OFFSET;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    // copy name shallowly
+    return [[[self class] allocWithZone:zone] initWithName:self.name];
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@", self.name];
 }
 
 - (id)initWithName:(NSString *)name
@@ -41,15 +53,9 @@
     return [[[self alloc] initWithName:name] autorelease];
 }
 
-- (NSString *)description
+- (NSString *)name
 {
-    return [NSString stringWithFormat:@"%@", self.name];
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    // copy name shallowly
-    return [[[self class] allocWithZone:zone] initWithName:self.name];
+    return name_;
 }
 
 - (BOOL)isEqual:(id)object
