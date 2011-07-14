@@ -10,6 +10,7 @@
 #import "PersistentList.h"
 #import "Symbol.h"
 #import "Exception.h"
+#import "Constants.h"
 
 BOOL isWhitespace(unichar c);
 BOOL isNumeric(unichar c);
@@ -161,7 +162,7 @@ id updateState(NSUInteger *x, NSDictionary *states);
     id value = updateState(&i, [LispReader readString:s fromStartPosition:i]);
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
-            [PersistentList createFromArray:[NSArray arrayWithObjects:[Symbol withName:@"quote"], value, nil]], @"value",
+            [PersistentList createFromArray:[NSArray arrayWithObjects:QUOTE, value, nil]], @"value",
             [NSNumber numberWithUnsignedInteger:i], @"index",
             nil];
 }
@@ -175,7 +176,7 @@ id updateState(NSUInteger *x, NSDictionary *states);
     id value = updateState(&i, [LispReader readString:s fromStartPosition:i]);
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
-            [PersistentList createFromArray:[NSArray arrayWithObjects:[Symbol withName:@"quasiquote"], value, nil]], @"value",
+            [PersistentList createFromArray:[NSArray arrayWithObjects:QUASIQUOTE, value, nil]], @"value",
             [NSNumber numberWithUnsignedInteger:i], @"index",
             nil];
 }
@@ -189,7 +190,7 @@ id updateState(NSUInteger *x, NSDictionary *states);
     id value = updateState(&i, [LispReader readString:s fromStartPosition:i]);
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
-            [PersistentList createFromArray:[NSArray arrayWithObjects:[Symbol withName:@"unquote"], value, nil]], @"value",
+            [PersistentList createFromArray:[NSArray arrayWithObjects:UNQUOTE, value, nil]], @"value",
             [NSNumber numberWithUnsignedInteger:i], @"index",
             nil];
 }
@@ -214,10 +215,20 @@ id updateState(NSUInteger *x, NSDictionary *states);
         
     }
     
-    NSLog(@"%@", a);
+    // check if this is a special symbol
+    id retValue = nil;
+    
+    if ([a isEqualToString:@"true"])
+        retValue = T;
+    else if ([a isEqualToString:@"false"])
+        retValue = F;
+    else if ([a isEqualToString:@"nil"])
+        retValue = NIL;
+    else
+        retValue = [Symbol withName:[NSString stringWithString:a]];
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
-            [Symbol withName:[NSString stringWithString:a]], @"value",
+            retValue, @"value",
             [NSNumber numberWithUnsignedInteger:i], @"index",
             nil];
 }
