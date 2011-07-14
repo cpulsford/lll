@@ -9,10 +9,12 @@
 #import "LispReader.h"
 #import "PersistentList.h"
 #import "Symbol.h"
+#import "Exception.h"
 
 BOOL isWhitespace(unichar c);
 BOOL isNumeric(unichar c);
-id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
+BOOL isInvalidSymbolChar(unichar c);
+id updateState(NSUInteger *x, NSDictionary *states);
 
 @interface ListReader : LispReader
 @end
@@ -45,6 +47,12 @@ id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
 @end
 
 @implementation LispReader
+
++ (id)readString:(NSString *)s
+{
+    return [[self readString:s fromStartPosition:0] objectForKey:@"value"];
+}
+
 + (id)readString:(NSString *)s fromStartPosition:(NSUInteger)x
 {
     NSUInteger i, length;
@@ -70,15 +78,10 @@ id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
                 break;
             }
             case ')':
-            {
-                break;
-            }
             case ']':
-            {
-                break;
-            }
             case '}':
             {
+                RAISE_ERROR(READER_EXCEPTION, @"Unexpected delimeter %c", c);
                 break;
             }
             case '\'':
@@ -88,12 +91,12 @@ id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
             }
             case '`':
             {
-                // read quasiquoted symbol
+                return [QuasiquoteReader readString:s fromStartPosition:i];
                 break;
             }
             case '~':
             {
-                // read unquoted symbol
+                return [UnquoteReader readString:s fromStartPosition:i];
                 break;
             }
             case '"':
@@ -140,7 +143,7 @@ id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
             break;
         }
         
-        updateState(a, &i, [LispReader readString:s fromStartPosition:i]);
+        [a addObject:updateState(&i, [LispReader readString:s fromStartPosition:i])];
     }
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -155,14 +158,41 @@ id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
 {
     NSUInteger i = x + 1;
     
-    id value = updateState(nil, &i, [LispReader readString:s fromStartPosition:i]);
+    id value = updateState(&i, [LispReader readString:s fromStartPosition:i]);
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
             [PersistentList createFromArray:[NSArray arrayWithObjects:[Symbol withName:@"quote"], value, nil]], @"value",
             [NSNumber numberWithUnsignedInteger:i], @"index",
             nil];
 }
+@end
 
+@implementation QuasiquoteReader
++ (id)readString:(NSString *)s fromStartPosition:(NSUInteger)x
+{
+    NSUInteger i = x + 1;
+    
+    id value = updateState(&i, [LispReader readString:s fromStartPosition:i]);
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [PersistentList createFromArray:[NSArray arrayWithObjects:[Symbol withName:@"quasiquote"], value, nil]], @"value",
+            [NSNumber numberWithUnsignedInteger:i], @"index",
+            nil];
+}
+@end
+
+@implementation UnquoteReader
++ (id)readString:(NSString *)s fromStartPosition:(NSUInteger)x
+{
+    NSUInteger i = x + 1;
+    
+    id value = updateState(&i, [LispReader readString:s fromStartPosition:i]);
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [PersistentList createFromArray:[NSArray arrayWithObjects:[Symbol withName:@"unquote"], value, nil]], @"value",
+            [NSNumber numberWithUnsignedInteger:i], @"index",
+            nil];
+}
 @end
 
 @implementation SymbolReader
@@ -175,7 +205,7 @@ id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
     for (i = x, length = [s length]; i < length; i++) {
         unichar c = [s characterAtIndex:i];
         
-        if (isWhitespace(c)) {
+        if (isInvalidSymbolChar(c)) {
             i--;
             break;
         }
@@ -183,6 +213,8 @@ id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
         [a appendString:[NSString stringWithCharacters:&c length:1]];
         
     }
+    
+    NSLog(@"%@", a);
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
             [Symbol withName:[NSString stringWithString:a]], @"value",
@@ -201,14 +233,15 @@ id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
     for (i = x + 1, length = [s length]; i < length; i++) {
         unichar c = [s characterAtIndex:i];
         
-        if (isWhitespace(c)) {
+        if (isInvalidSymbolChar(c)) {
             i--;
             break;
         }
         
         [a appendString:[NSString stringWithCharacters:&c length:1]];
-        
     }
+    
+    NSLog(@"%@", a);
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
             [Keyword withName:[NSString stringWithString:a]], @"value",
@@ -272,13 +305,26 @@ BOOL isNumeric(unichar c)
     }
 }
 
-id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states)
+BOOL isInvalidSymbolChar(unichar c)
 {
-    id value = [states objectForKey:@"value"];
-    
-    [a addObject:value];
-    
+    switch (c) {
+        case ' ':
+        case ',':
+        case '(':
+        case ')':
+        case '[':
+        case ']':
+        case '{':
+        case '}':
+            return YES;
+        default:
+            return NO;
+    }
+}
+
+id updateState(NSUInteger *x, NSDictionary *states)
+{
     *x = [[states objectForKey:@"index"] unsignedIntegerValue] + 1;
     
-    return value;
+    return [states objectForKey:@"value"];
 }

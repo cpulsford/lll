@@ -10,6 +10,8 @@
 
 @interface LispReader : NSObject
 
++ (id)readString:(NSString *)s;
+
 + (id)readString:(NSString *)s fromStartPosition:(NSUInteger)x;
 
 @end
