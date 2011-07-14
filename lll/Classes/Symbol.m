@@ -40,7 +40,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"'%@", self.name];
+    return [NSString stringWithFormat:@"%@", self.name];
 }
 
 - (id)copyWithZone:(NSZone *)zone
