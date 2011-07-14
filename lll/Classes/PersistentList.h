@@ -6,11 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "IPersistentList.h"
 #import "AbstractSequence.h"
-
-@interface EmptyList : AbstractSequence <IPersistentList>
-@end
+#import "IPersistentList.h"
 
 @interface PersistentList : AbstractSequence <IPersistentList>
 @end

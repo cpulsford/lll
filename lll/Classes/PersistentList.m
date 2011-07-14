@@ -9,6 +9,9 @@
 #import "PersistentList.h"
 #import "Utils.h"
 
+@interface EmptyList : AbstractSequence <IPersistentList>
+@end
+
 @implementation PersistentList
 {
     id first_;
