@@ -12,7 +12,7 @@
 
 BOOL isWhitespace(unichar c);
 BOOL isNumeric(unichar c);
-void updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
+id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
 
 @interface ListReader : LispReader
 @end
@@ -49,8 +49,6 @@ void updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
 {
     NSUInteger i, length;
     
-    NSMutableArray *parsedAtoms = [NSMutableArray array];
-    
     for (i = x, length = [s length]; i < length; i++) {
         unichar c = [s characterAtIndex:i];
         
@@ -61,8 +59,7 @@ void updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
         switch (c) {
             case '(':
             {
-                [parsedAtoms addObject:[ListReader readString:s fromStartPosition:i]];
-                break;
+                return [ListReader readString:s fromStartPosition:i];
             }
             case '[':
             {
@@ -86,7 +83,7 @@ void updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
             }
             case '\'':
             {
-                // read quoted symbol
+                return [QuoteReader readString:s fromStartPosition:i];
                 break;
             }
             case '`':
@@ -106,31 +103,66 @@ void updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
             }
             case ':':
             {
-                updateState(parsedAtoms, &i, [KeywordReader readString:s fromStartPosition:i]);
+                return [KeywordReader readString:s fromStartPosition:i];
                 break;
             }
             default:
             {
                 if (isNumeric(c)) {
-                    updateState(parsedAtoms, &i, [NumberReader readString:s fromStartPosition:i]);
+                    return [NumberReader readString:s fromStartPosition:i];
                 }
                 else {
-                    updateState(parsedAtoms, &i, [SymbolReader readString:s fromStartPosition:i]);
+                    return [SymbolReader readString:s fromStartPosition:i];
                 }
             }
         }
     }
     
-    return parsedAtoms;    
+    return nil;    
 }
 @end
 
 @implementation ListReader
 + (id)readString:(NSString *)s fromStartPosition:(NSUInteger)x
 {
-    return [LispReader readString:s fromStartPosition:x + 1];
+    NSUInteger i, length;
     
+    NSMutableArray *a = [NSMutableArray array];
+    
+    for (i = x + 1, length = [s length]; i < length;) {
+        unichar c = [s characterAtIndex:i];
+                
+        if (isWhitespace(c)) {
+            i++;
+            continue;
+        }
+        else if (c == ')') {
+            break;
+        }
+        
+        updateState(a, &i, [LispReader readString:s fromStartPosition:i]);
+    }
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [PersistentList createFromArray:a], @"value",
+            [NSNumber numberWithUnsignedInteger:i], @"index",
+            nil];
 }
+@end
+
+@implementation QuoteReader
++ (id)readString:(NSString *)s fromStartPosition:(NSUInteger)x
+{
+    NSUInteger i = x + 1;
+    
+    id value = updateState(nil, &i, [LispReader readString:s fromStartPosition:i]);
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [PersistentList createFromArray:[NSArray arrayWithObjects:[Symbol withName:@"quote"], value, nil]], @"value",
+            [NSNumber numberWithUnsignedInteger:i], @"index",
+            nil];
+}
+
 @end
 
 @implementation SymbolReader
@@ -201,7 +233,6 @@ void updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states);
         }
         
         [a appendString:[NSString stringWithCharacters:&c length:1]];
-        
     }
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -241,9 +272,13 @@ BOOL isNumeric(unichar c)
     }
 }
 
-void updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states)
+id updateState(NSMutableArray *a, NSUInteger *x, NSDictionary *states)
 {
-    [a addObject:[states objectForKey:@"value"]];
+    id value = [states objectForKey:@"value"];
     
-    *x = [[states objectForKey:@"index"] unsignedIntegerValue];
+    [a addObject:value];
+    
+    *x = [[states objectForKey:@"index"] unsignedIntegerValue] + 1;
+    
+    return value;
 }
