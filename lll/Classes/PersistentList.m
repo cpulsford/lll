@@ -43,13 +43,18 @@
     return self;
 }
 
-+ (id)persistentListWithFirst:(id)first
-                         tail:(id <IPersistentList>)tail
-                        count:(NSUInteger)count
++ (id)listWithFirst:(id)first
+               tail:(id <IPersistentList>)tail
+              count:(NSUInteger)count
 {
     return [[[self alloc] initWithFirst:first
                                    tail:tail
                                   count:count] autorelease];
+}
+
++ (id)listWithValue:(id)x
+{
+    return [PersistentList listWithFirst:x tail:nil count:1];
 }
 
 + (id <ISequence>)empty
@@ -82,9 +87,9 @@
 
 - (id <ISequence>)cons:(id)value
 {
-    return [PersistentList persistentListWithFirst:value
-                                              tail:self
-                                             count:count_ + 1];
+    return [PersistentList listWithFirst:value
+                                    tail:self
+                                   count:count_ + 1];
 }
 
 - (NSUInteger)count
@@ -141,9 +146,9 @@
 
 - (id <ISequence>)cons:(id)value
 {
-    return [PersistentList persistentListWithFirst:value
-                                              tail:self
-                                             count:1];
+    return [PersistentList listWithFirst:value
+                                    tail:self
+                                   count:1];
 }
 
 - (NSUInteger)count

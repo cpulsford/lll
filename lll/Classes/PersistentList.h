@@ -10,4 +10,7 @@
 #import "IPersistentList.h"
 
 @interface PersistentList : AbstractSequence <IPersistentList>
+
++ (id)listWithValue:(id)x;
+
 @end
