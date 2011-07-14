@@ -8,6 +8,9 @@
 
 #import "Symbol.h"
 
+#define SYMBOL_HASH_OFFSET 1
+#define KEYWORD_HASH_OFFSET 1
+
 @implementation Symbol
 
 @synthesize name = name_;
@@ -21,7 +24,7 @@
 
 - (NSUInteger)hash
 {
-    return [self.name hash];
+    return [self.name hash] + SYMBOL_HASH_OFFSET;
 }
 
 - (id)initWithName:(NSString *)name
@@ -55,7 +58,7 @@
         return YES;
     }
     
-    // [Keyword withName:@"foo"] != [Symbol withName:@"foo"]
+    // [Keyword withName:@"foo"] does not equal [Symbol withName:@"foo"]
     if ([self class] == [object class]) {
         return [self.name isEqualToString:[(Symbol *)object name]];
     }
@@ -67,6 +70,11 @@
 
 
 @implementation Keyword
+
+- (NSUInteger)hash
+{
+    return [self.name hash] + KEYWORD_HASH_OFFSET;
+}
 
 - (NSString *)description
 {
