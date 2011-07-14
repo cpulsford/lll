@@ -50,27 +50,27 @@
 
 + (id <ISequence>)empty
 {
-    unsupportedOperation(__FUNCTION__);
+    unsupportedOperation;
 }
 
 - (id)first
 {
-    unsupportedOperation(__FUNCTION__);
+    unsupportedOperation;
 }
 
 - (id <ISequence>)next
 {
-    unsupportedOperation(__FUNCTION__);
+    unsupportedOperation;
 }
 
 - (id <ISequence>)more
 {
-    unsupportedOperation(__FUNCTION__);
+    unsupportedOperation;
 }
 
 - (id <ISequence>)cons:(id)value
 {
-    unsupportedOperation(__FUNCTION__);
+    unsupportedOperation;
 }
 
 @end
