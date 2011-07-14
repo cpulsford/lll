@@ -45,7 +45,8 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return [[[self class] allocWithZone:zone] initWithName:self.name]; // copy name shallowly
+    // copy name shallowly
+    return [[[self class] allocWithZone:zone] initWithName:self.name];
 }
 
 - (BOOL)isEqual:(id)object
@@ -54,7 +55,7 @@
         return YES;
     }
     
-    // symbols and keywords are never equal
+    // [Keyword withName:@"foo"] != [Symbol withName:@"foo"]
     if ([self class] == [object class]) {
         return [self.name isEqualToString:[(Symbol *)object name]];
     }

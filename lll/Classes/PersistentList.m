@@ -30,7 +30,9 @@
     [super dealloc];
 }
 
-- (id)initWithFirst:(id)first tail:(id <IPersistentList>)tail count:(NSUInteger)count
+- (id)initWithFirst:(id)first
+               tail:(id <IPersistentList>)tail
+              count:(NSUInteger)count
 {
     if ((self = [super init])) {
         first_ = [first retain];
@@ -41,9 +43,13 @@
     return self;
 }
 
-+ (id)persistentListWithFirst:(id)first tail:(id <IPersistentList>)tail count:(NSUInteger)count
++ (id)persistentListWithFirst:(id)first
+                         tail:(id <IPersistentList>)tail
+                        count:(NSUInteger)count
 {
-    return [[[self alloc] initWithFirst:first tail:tail count:count] autorelease];
+    return [[[self alloc] initWithFirst:first
+                                   tail:tail
+                                  count:count] autorelease];
 }
 
 + (id <ISequence>)empty
@@ -52,7 +58,9 @@
     
     static EmptyList *shared = nil;
     
-    dispatch_once(&pred, ^{ shared = [[EmptyList alloc] init]; });
+    dispatch_once(&pred, ^{
+        shared = [[EmptyList alloc] init];
+    });
     
     return shared;
 }
@@ -74,7 +82,9 @@
 
 - (id <ISequence>)cons:(id)value
 {
-    return [PersistentList persistentListWithFirst:value tail:self count:count_ + 1];
+    return [PersistentList persistentListWithFirst:value
+                                              tail:self
+                                             count:count_ + 1];
 }
 
 - (NSUInteger)count
@@ -131,7 +141,9 @@
 
 - (id <ISequence>)cons:(id)value
 {
-    return [PersistentList persistentListWithFirst:value tail:self count:1];
+    return [PersistentList persistentListWithFirst:value
+                                              tail:self
+                                             count:1];
 }
 
 - (NSUInteger)count
