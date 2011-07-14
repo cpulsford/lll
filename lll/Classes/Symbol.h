@@ -10,6 +10,8 @@
 
 @interface Symbol : NSObject <NSCopying>
 
+- (id)initWithName:(NSString *)name;
+
 + (id)withName:(NSString *)name;
 
 - (NSString *)name;
