@@ -15,3 +15,5 @@
 #define INDEXOUTOFBOUNDS_EXCEPTION     (@"Index Out of Bounds Exception")
 
 #define IMMUTABLESTATE_EXCEPTION       (@"Immutable State Exception")
+
+#define READER_EXCEPTION               (@"Reader Exception")
