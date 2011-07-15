@@ -14,7 +14,9 @@
 - (id)performSelector:(SEL)selector withObjects:(NSArray *)arguments
 {
     if (self == nil || self == NIL) {
-        RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"nil does not respond to %@", NSStringFromSelector(selector));
+        RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION
+                    ,@"nil does not respond to %@"
+                    ,NSStringFromSelector(selector));
     }
     NSMethodSignature *ms = [self methodSignatureForSelector:selector];
     
@@ -23,7 +25,11 @@
     NSUInteger numberOfExpectedArguments = [ms numberOfArguments] - 2;
 	
 	if (numberOfExpectedArguments != [arguments count]) {
-		RAISE_ERROR(ARITY_EXCEPTION, @"gave %ld args to %@ but expected %ld", [arguments count], NSStringFromSelector(selector), numberOfExpectedArguments);
+		RAISE_ERROR(ARITY_EXCEPTION
+                    ,@"gave %ld args to %@ but expected %ld"
+                    ,[arguments count]
+                    ,NSStringFromSelector(selector)
+                    ,numberOfExpectedArguments);
 	}
     
     [inv setTarget:self];
