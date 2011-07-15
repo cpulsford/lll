@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+// FIX ME, something is definitely broken. CLosing brackets aren't looked for properly I think...
+
 @interface LispReader : NSObject
 
 + (id)readString:(NSString *)s;
