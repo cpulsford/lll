@@ -27,6 +27,7 @@
 		1EC7DA0213CF36F400443D6F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7D9FE13CF36F400443D6F /* Constants.m */; };
 		1EC7DA0313CF36F400443D6F /* Equality.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7DA0013CF36F400443D6F /* Equality.m */; };
 		1EC7DA0713CF3B4700443D6F /* NullAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7DA0613CF3B4700443D6F /* NullAdditions.m */; };
+		1EC7DA0C13CFC3B700443D6F /* ObjectAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7DA0B13CFC3B700443D6F /* ObjectAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		1EC7DA0013CF36F400443D6F /* Equality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Equality.m; path = Classes/Equality.m; sourceTree = "<group>"; };
 		1EC7DA0513CF3B4700443D6F /* NullAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NullAdditions.h; sourceTree = "<group>"; };
 		1EC7DA0613CF3B4700443D6F /* NullAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullAdditions.m; sourceTree = "<group>"; };
+		1EC7DA0A13CFC3B700443D6F /* ObjectAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectAdditions.h; sourceTree = "<group>"; };
+		1EC7DA0B13CFC3B700443D6F /* ObjectAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectAdditions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,12 +193,12 @@
 		1E1D90B913CA9D380097DB51 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1E1D90E713CAC6760097DB51 /* Data Structures */,
 				1EC7DA0813CF932D00443D6F /* Cocoa Additions */,
 				1EC7D9FD13CF36F400443D6F /* Constants.h */,
 				1EC7D9FE13CF36F400443D6F /* Constants.m */,
 				1EC7D9FF13CF36F400443D6F /* Equality.h */,
 				1EC7DA0013CF36F400443D6F /* Equality.m */,
-				1E1D90E713CAC6760097DB51 /* Data Structures */,
 				1E1D90E613CAC39D0097DB51 /* Exception.h */,
 				1E1D90E313CAC0140097DB51 /* Scope.h */,
 				1E1D90E413CAC0150097DB51 /* Scope.m */,
@@ -237,6 +240,8 @@
 			children = (
 				1EC7DA0513CF3B4700443D6F /* NullAdditions.h */,
 				1EC7DA0613CF3B4700443D6F /* NullAdditions.m */,
+				1EC7DA0A13CFC3B700443D6F /* ObjectAdditions.h */,
+				1EC7DA0B13CFC3B700443D6F /* ObjectAdditions.m */,
 			);
 			name = "Cocoa Additions";
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				1EC7DA0213CF36F400443D6F /* Constants.m in Sources */,
 				1EC7DA0313CF36F400443D6F /* Equality.m in Sources */,
 				1EC7DA0713CF3B4700443D6F /* NullAdditions.m in Sources */,
+				1EC7DA0C13CFC3B700443D6F /* ObjectAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
