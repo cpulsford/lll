@@ -44,6 +44,7 @@ id evaluateAtom(id atom, Scope *scope)
         Class target = NSClassFromString([evaluateAtom([args objectAtIndex:0], scope) name]);
         SEL selector = NSSelectorFromString([evaluateAtom([args objectAtIndex:1], scope) name]);
         NSArray *params = [args subarrayWithRange:NSMakeRange(2, [args count] - 2)];
+        // Not evaluating params yet, only works for literals (numbers)
         
         return [target performSelector:selector withObjects:params];
     }
@@ -52,6 +53,7 @@ id evaluateAtom(id atom, Scope *scope)
         id target = evaluateAtom([args objectAtIndex:0], scope);
         SEL selector = NSSelectorFromString([evaluateAtom([args objectAtIndex:1], scope) name]);
         NSArray *params = [args subarrayWithRange:NSMakeRange(2, [args count] - 2)];
+        // Not evaluating params yet, only works for literals (numbers)
         
         return [target performSelector:selector withObjects:params];
     }
