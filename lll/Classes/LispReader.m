@@ -226,8 +226,6 @@ id updateState(NSUInteger *x, NSDictionary *states);
         [a appendString:[NSString stringWithCharacters:&c length:1]];
     }
     
-    NSLog(@"%@", a);
-    
     return [NSDictionary dictionaryWithObjectsAndKeys:
             [Keyword withName:[NSString stringWithString:a]], @"value",
             [NSNumber numberWithUnsignedInteger:i], @"index",
