@@ -7,22 +7,26 @@
 //
 
 #import "ObjectAdditions.h"
+#import "Exception.h"
 
 @implementation NSObject (Additions)
 - (id)performSelector:(SEL)selector withObjects:(NSArray *)arguments
-{
+{    
     NSMethodSignature *ms = [self methodSignatureForSelector:selector];
+    
     NSInvocation *inv = [NSInvocation invocationWithMethodSignature:ms];
     
     NSUInteger numberOfExpectedArguments = [ms numberOfArguments] - 2;
 	
 	if (numberOfExpectedArguments != [arguments count]) {
-		return nil;
+		RAISE_ERROR(ARITY_EXCEPTION, @"gave %ld args to %@ but expected %ld", [arguments count], NSStringFromSelector(selector), numberOfExpectedArguments);
 	}
     
     [inv setTarget:self];
     
     [inv setSelector:selector];
+    
+    // unbox the args and set them into the invocation
     
     NSUInteger i, j;
     
@@ -111,6 +115,8 @@
     }
     
     [inv invoke];
+    
+    // box back up the return type
     
     char *buffer;    
     id retValue;
