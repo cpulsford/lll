@@ -11,11 +11,6 @@
 @class Symbol;
 
 @interface Scope : NSObject
-{
-    NSMutableDictionary *localVars_;
-    
-    Scope *parentScope_;    
-}
 
 @property (readonly) NSMutableDictionary *localVars;
 @property (readonly) Scope               *parentScope;
@@ -24,13 +19,13 @@
 
 + (id)scope;
 
-+ (id)scopeWithParentScope:(Scope *)parentScope;
++ (Scope *)scopeWithParentScope:(Scope *)parentScope;
 
-+ (id)scopeWithParentScope:(Scope *)parentScope
-                 andValues:(NSArray *)values
-                forSymbols:(NSArray *)symbols;
++ (Scope *)scopeWithParentScope:(Scope *)parentScope
+                      andValues:(NSArray *)values
+                     forSymbols:(NSArray *)symbols;
 
-+ (id)rootScope;
++ (Scope *)rootScope;
 
 - (id)valueForSymbol:(Symbol *)symbol;
 

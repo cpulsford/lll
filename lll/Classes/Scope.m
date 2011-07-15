@@ -8,9 +8,15 @@
 
 #import "Scope.h"
 #import "Symbol.h"
+#import "Constants.h"
 #import "Exception.h"
 
 @implementation Scope
+{
+    NSMutableDictionary *localVars_;
+    
+    Scope *parentScope_;    
+}
 
 @synthesize localVars   = localVars_;
 @synthesize parentScope = parentScope_;
@@ -54,23 +60,23 @@ static Scope *GLOBAL;
     return [[[self alloc] init] autorelease];
 }
 
-+ (id)scopeWithParentScope:(Scope *)parentScope
++ (Scope *)scopeWithParentScope:(Scope *)parentScope
 {
-    return [[[self alloc] initWithParentScope:parentScope] autorelease];
+    return [[[Scope alloc] initWithParentScope:parentScope] autorelease];
 }
 
-+ (id)scopeWithParentScope:(Scope *)parentScope
-                 andValues:(NSArray *)values
-                forSymbols:(NSArray *)symbols
++ (Scope *)scopeWithParentScope:(Scope *)parentScope
+                      andValues:(NSArray *)values
+                     forSymbols:(NSArray *)symbols
 {
-    id newScope = [self scopeWithParentScope:parentScope];
+    Scope *newScope = [self scopeWithParentScope:parentScope];
     
     [newScope setValues:values forSymbols:symbols allowOverwriting:YES];
     
     return newScope;
 }
 
-+ (id)rootScope
++ (Scope *)rootScope
 {
     return GLOBAL;
 }
@@ -102,7 +108,7 @@ allowOverwriting:(BOOL)allowOverwriting
         }
     }
 
-    [self.localVars setObject:(value ? value : [NSNull null])
+    [self.localVars setObject:(value ? value : NIL)
                        forKey:[symbol name]];
 }
 

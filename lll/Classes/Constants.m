@@ -35,7 +35,7 @@ Class KEYWORD_CLASS;
 Class BOOL_CLASS;
 
 @implementation Constants
-
+#pragma mark I'm having a hard time finding out if this is the most idiomatic way to do this. Seems to work for now.
 + (void)load
 {
     NIL              = [[NSNull alloc] init];
@@ -56,5 +56,4 @@ Class BOOL_CLASS;
     KEYWORD_CLASS    = [Keyword class];
     BOOL_CLASS       = [Bool class];
 }
-
 @end

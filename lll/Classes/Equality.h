@@ -9,22 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "ISequence.h"
 
-
 @interface Bool : NSObject
-
 - (id)initWithBool:(BOOL)val;
-
-- (const Bool *)equalsTrue;
+- (const Bool *)equalsTrue; // these two would be for implementing true? false? might be factored out into RT eventually
 - (const Bool *)equalsFalse;
-
-+ (BOOL)isTruthy:(id)val;
++ (BOOL)isTruthy:(id)val; // these two are used to implement the if construct and return plain BOOLs
 + (BOOL)isFalsey:(id)val;
-
 @end
 
-
 @interface Equality : NSObject
-
 + (const Bool *)areEqual:(id <ISequence>)objs;
-
 @end
