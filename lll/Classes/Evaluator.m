@@ -40,22 +40,26 @@ id evaluateAtom(id atom, Scope *scope)
     id first = [s first];
     
     if ([first isEqual:STATIC]) {
-        NSArray *args = [[s more] reify];
-        Class target = NSClassFromString([evaluateAtom([args objectAtIndex:0], scope) name]);
-        SEL selector = NSSelectorFromString([evaluateAtom([args objectAtIndex:1], scope) name]);
-        NSArray *params = [args subarrayWithRange:NSMakeRange(2, [args count] - 2)];
-        // Not evaluating params yet, only works for literals (numbers)
+        id <ISequence> c = [s more];
         
-        return [target performSelector:selector withObjects:params];
+        Class target = NSClassFromString([evaluateAtom([c first], scope) name]);
+        
+        c = [c more];
+        
+        SEL selector = NSSelectorFromString([evaluateAtom([c first], scope) name]);
+                
+        return [target performSelector:selector withObjects:[c more] andScope:scope];
     }
     if ([first isEqual:INSTANCE]) {
-        NSArray *args = [[s more] reify];
-        id target = evaluateAtom([args objectAtIndex:0], scope);
-        SEL selector = NSSelectorFromString([evaluateAtom([args objectAtIndex:1], scope) name]);
-        NSArray *params = [args subarrayWithRange:NSMakeRange(2, [args count] - 2)];
-        // Not evaluating params yet, only works for literals (numbers)
+        id <ISequence> c = [s more];
         
-        return [target performSelector:selector withObjects:params];
+        id target = evaluateAtom([c first], scope);
+        
+        c = [c more];
+        
+        SEL selector = NSSelectorFromString([evaluateAtom([c first], scope) name]);
+                
+        return [target performSelector:selector withObjects:[c more] andScope:scope];
     }
     else if ([first isEqual:QUOTE]) {
         return [[s more] first];

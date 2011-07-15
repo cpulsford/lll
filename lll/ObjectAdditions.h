@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol ISequence;
+@class Scope;
+
 @interface NSObject (Additions)
-- (id)performSelector:(SEL)selector withObjects:(NSArray *)objects;
+- (id)performSelector:(SEL)selector withObjects:(id <ISequence>)arguments andScope:(Scope *)scope;
 @end

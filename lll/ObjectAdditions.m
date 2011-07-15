@@ -7,11 +7,14 @@
 //
 
 #import "ObjectAdditions.h"
+#import "Evaluator.h"
+#import "PersistentList.h"
+#import "Scope.h"
 #import "Constants.h"
 #import "Exception.h"
 
 @implementation NSObject (Additions)
-- (id)performSelector:(SEL)selector withObjects:(NSArray *)arguments
+- (id)performSelector:(SEL)selector withObjects:(id <ISequence>)arguments andScope:(Scope *)scope
 {
     if (self == nil || self == NIL) {
         RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION
@@ -24,10 +27,10 @@
     
     NSUInteger numberOfExpectedArguments = [ms numberOfArguments] - 2;
 	
-	if (numberOfExpectedArguments != [arguments count]) {
+	if (numberOfExpectedArguments != [(id <ICounted>)arguments count]) {
 		RAISE_ERROR(ARITY_EXCEPTION
                     ,@"gave %ld args to %@ but expected %ld"
-                    ,[arguments count]
+                    ,[(id <ICounted>)arguments count]
                     ,NSStringFromSelector(selector)
                     ,numberOfExpectedArguments);
 	}
@@ -38,10 +41,12 @@
     
     // unbox the args and set them into the invocation
     
-    NSUInteger i, j;
+    id <ISequence> i;
     
-    for (i = 0, j = 2; i < numberOfExpectedArguments; i++, j++) {
-        id arg = [arguments objectAtIndex:i];
+    NSUInteger j;
+    
+    for (i = arguments, j = 2; [i seq]; i = [i more], j++) {
+        id arg = evaluateAtom([i first], scope);
         
         const char *argType = [ms getArgumentTypeAtIndex:j];
         
