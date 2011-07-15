@@ -67,58 +67,32 @@ id updateState(NSUInteger *x, NSDictionary *states);
         
         switch (c) {
             case '(':
-            {
                 return [ListReader readString:s fromStartPosition:i];
-            }
             case '[':
-            {
                 break;
-            }
             case '{':
-            {
                 break;
-            }
             case ')':
             case ']':
             case '}':
-            {
                 RAISE_ERROR(READER_EXCEPTION, @"Unexpected delimeter %c", c);
-                break;
-            }
             case '\'':
-            {
                 return [QuoteReader readString:s fromStartPosition:i];
-                break;
-            }
             case '`':
-            {
                 return [QuasiquoteReader readString:s fromStartPosition:i];
-                break;
-            }
             case '~':
-            {
                 return [UnquoteReader readString:s fromStartPosition:i];
-                break;
-            }
             case '"':
-            {
-                // read string
                 break;
-            }
             case ':':
-            {
                 return [KeywordReader readString:s fromStartPosition:i];
-                break;
-            }
             default:
-            {
                 if (isNumeric(c)) {
                     return [NumberReader readString:s fromStartPosition:i];
                 }
                 else {
                     return [SymbolReader readString:s fromStartPosition:i];
                 }
-            }
         }
     }
     
