@@ -128,7 +128,6 @@
     
     // box back up the return type
     
-    char *buffer;    
     id retValue;
     const char *retType = [ms methodReturnType];
     
@@ -138,57 +137,95 @@
             [inv getReturnValue:&retValue];
             break;
         case 'c':
+        {
+            char buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithChar:*(char *)buffer] decimalValue]];
-            break;
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithChar:buffer] decimalValue]];
+            break;   
+        }
         case 'C':
+        {
+            unsigned char buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedChar:*(unsigned char *)buffer] decimalValue]];
-            break;
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedChar:buffer] decimalValue]];
+            break;   
+        }
         case 's':
+        {
+            short buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithShort:*(short *)buffer] decimalValue]];
-            break;
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithShort:buffer] decimalValue]];
+            break;   
+        }
         case 'S':
+        {
+            unsigned short buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedShort:*(unsigned short *)buffer] decimalValue]];
-            break;
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedShort:buffer] decimalValue]];
+            break;   
+        }
         case 'i':
+        {
+            int buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInt:*(int *)buffer] decimalValue]];
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInt:buffer] decimalValue]];
             break;
+        }
         case 'I':
+        {
+            unsigned int buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedInt:*(unsigned *)buffer] decimalValue]];
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedInt:buffer] decimalValue]];
             break;
+        }
         case 'l':
+        {
+            long buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithLong:*(long *)buffer] decimalValue]];
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithLong:buffer] decimalValue]];
             break;
+        }
         case 'L':
+        {
+            unsigned long buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedLong:*(unsigned long *)buffer] decimalValue]];
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedLong:buffer] decimalValue]];
             break;
+        }
         case 'q':
+        {
+            unsigned long long buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithLongLong:*(long long *)buffer] decimalValue]];
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithLongLong:buffer] decimalValue]];
             break;
+        }
         case 'Q':
+        {
+            unsigned long long buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedLongLong:*(unsigned long long *)buffer] decimalValue]];
-            break;
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithUnsignedLongLong:buffer] decimalValue]];
+            break;   
+        }
         case 'f':
+        {
+            float buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithFloat:*(float *)buffer] decimalValue]];
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithFloat:buffer] decimalValue]];
             break;
+        }
         case 'd':
+        {
+            double buffer;
             [inv getReturnValue:&buffer];
-            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:*(double *)buffer] decimalValue]];
+            retValue = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:buffer] decimalValue]];
             break;
-        case '^': // pointer, no string stuff supported right now
-        case '{': // struct, only simple ones containing only basic types right now
-        case '[': // array, of whatever, just gets the address
-            retValue = [[[NSValue alloc] initWithBytes:buffer objCType:retType] autorelease];
+        }
+// i'll figure this out later if necessary. selector literals might be nice
+//        case '^': // pointer
+//        case '{': // struct
+//        case '[': // array
+//            char *buffer;
+//            retValue = [[[NSValue alloc] initWithBytes:buffer objCType:retType] autorelease];
     }
     
     return retValue;
