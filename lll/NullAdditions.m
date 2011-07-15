@@ -9,10 +9,8 @@
 #import "NullAdditions.h"
 
 @implementation NSNull (Additions)
-
 - (NSString *)description
 {
     return @"nil";
 }
-
 @end
