@@ -7,11 +7,15 @@
 //
 
 #import "ObjectAdditions.h"
+#import "Constants.h"
 #import "Exception.h"
 
 @implementation NSObject (Additions)
 - (id)performSelector:(SEL)selector withObjects:(NSArray *)arguments
-{    
+{
+    if (self == nil || self == NIL) {
+        RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"nil does not respond to %@", NSStringFromSelector(selector));
+    }
     NSMethodSignature *ms = [self methodSignatureForSelector:selector];
     
     NSInvocation *inv = [NSInvocation invocationWithMethodSignature:ms];
