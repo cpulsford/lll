@@ -30,9 +30,9 @@ Symbol const *DO_ASSIGN;
 
 Symbol const *VARIADIC;
 
-Class   SYMBOL_CLASS;
-Class   KEYWORD_CLASS;
-Class   BOOL_CLASS;
+Class SYMBOL_CLASS;
+Class KEYWORD_CLASS;
+Class BOOL_CLASS;
 
 @interface Constants : NSObject
 @end
