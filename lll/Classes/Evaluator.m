@@ -31,7 +31,7 @@ id evaluateAtom(id atom, Scope *scope)
     else if (KEYWORD_CLASS == atomClass) {
         return atom;
     }
-    else if (![atom conformsToProtocol:@protocol(ISequence)]) {
+    else if (![atom conformsToProtocol:@protocol(IPersistentList)]) {
         return atom;
     }
     
