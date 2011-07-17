@@ -30,4 +30,9 @@
     return evaluateAtom([LispReader readString:s], globalScope_);
 }
 
+- (id)evaluateAtom:(id <ISequence>)s
+{
+    return evaluateAtom(s, globalScope_);
+}
+
 @end

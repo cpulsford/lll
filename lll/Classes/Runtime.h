@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol ISequence;
+
 @interface Runtime : NSObject
 
 - (id)evaluateString:(NSString *)s;
+
+- (id)evaluateAtom:(id <ISequence>)s;
 
 @end
