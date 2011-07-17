@@ -103,13 +103,13 @@ static Scope *GLOBAL;
 allowOverwriting:(BOOL)allowOverwriting
 {
     if (!allowOverwriting) {
-        if ([self.localVars objectForKey:[symbol name]]) {
+        if ([self.localVars objectForKey:symbol]) {
             RAISE_ERROR(IMMUTABLESTATE_EXCEPTION, @"'%@' is already bound in this scope", symbol);
         }
     }
 
     [self.localVars setObject:(value ? value : NIL)
-                       forKey:[symbol name]];
+                       forKey:symbol];
 }
 
 - (void)setValues:(NSArray *)values

@@ -10,6 +10,4 @@
 
 @class Scope;
 
-id evaluateString(NSString *s);
-
 id evaluateAtom(id atom, Scope *scope);

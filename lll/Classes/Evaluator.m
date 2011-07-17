@@ -13,13 +13,7 @@
 #import "Constants.h"
 #import "Symbol.h"
 #import "ObjectAdditions.h"
-
-id evaluateAtom(id atom, Scope *scope);
-
-id evaluateString(NSString *s)
-{
-    return evaluateAtom([LispReader readString:s], [Scope scope]);
-}
+#import "Function.h"
 
 id evaluateAtom(id atom, Scope *scope)
 {
@@ -35,7 +29,7 @@ id evaluateAtom(id atom, Scope *scope)
         return atom;
     }
     
-    id <ISequence> s = atom;
+    id <ISequence> s = (id <ISequence>)atom;
     
     id first = [s first];
     
@@ -50,7 +44,7 @@ id evaluateAtom(id atom, Scope *scope)
                 
         return [target performSelector:selector withObjects:[c more] andScope:scope];
     }
-    if ([first isEqual:INSTANCE]) {
+    else if ([first isEqual:INSTANCE]) {
         id <ISequence> c = [s more];
         
         id target = evaluateAtom([c first], scope);
@@ -67,7 +61,21 @@ id evaluateAtom(id atom, Scope *scope)
     else if ([first isEqual:UNQUOTE]) {
         return evaluateAtom([[s more] first], scope);
     }
-    else {
+    else if ([first isEqual:FN]) {
+        return [Function fnWithForm:[s more] shouldEvaluateArgs:YES];
+    }
+    else if ([first isEqual:MACRO]) {
+        return [Function fnWithForm:[s more] shouldEvaluateArgs:NO];
+    }
+    else if ([first isEqual:DEF]) {
+        NSArray *array = [[s more] reify];
+        [scope setValue:evaluateAtom([array objectAtIndex:1], scope) forSymbol:[array objectAtIndex:0] allowOverwriting:YES];
+        
         return NIL;
+    }
+    else {
+        Function *f = evaluateAtom(first, scope);
+        
+        return [f invokeWithArgs:[s more] withinScope:scope];
     }
 }

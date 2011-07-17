@@ -22,6 +22,7 @@ Symbol const *UNQUOTE_SPLICING;
 Symbol const *FN;
 Symbol const *MACRO;
 Symbol const *IF;
+Symbol const *DEF;
 
 Symbol const *STATIC;
 Symbol const *INSTANCE;
