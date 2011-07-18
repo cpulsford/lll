@@ -18,25 +18,26 @@ NS_INLINE BOOL isInvalidSymbolChar(unichar c);
 NS_INLINE BOOL isValidInitialNumberChar(unichar c);
 NS_INLINE BOOL isValidEndDelimeter(unichar c);
 
-NS_INLINE id readNextExpression(NSString *s, NSUInteger *start, NSUInteger count);
-NS_INLINE id readList(NSString *s, NSUInteger *start, NSUInteger count);
-NS_INLINE id readQuote(NSString *s, NSUInteger *start, NSUInteger count);
-NS_INLINE id readQuasiquote(NSString *s, NSUInteger *start, NSUInteger count);
-NS_INLINE id readUnquote(NSString *s, NSUInteger *start, NSUInteger count);
-NS_INLINE id readKeyword(NSString *s, NSUInteger *start, NSUInteger count);
-NS_INLINE id readSymbol(NSString *s, NSUInteger *start, NSUInteger count);
-NS_INLINE id readNumber(NSString *s, NSUInteger *start, NSUInteger count);
+NS_INLINE id readNextExpression();
+NS_INLINE id readList();
+NS_INLINE id readQuote();
+NS_INLINE id readQuasiquote();
+NS_INLINE id readUnquote();
+NS_INLINE id readKeyword();
+NS_INLINE id readSymbol();
+NS_INLINE id readNumber();
 
-id readString(NSString *s)
+static NSUInteger start, count;
+static NSString *s;
+
+id readString(NSString *str)
 {
+    s = str;
+    
     NSMutableArray *a = [NSMutableArray array];
     
-    NSUInteger i, count;
-
-    count = [s length];
-    
-    for (i = 0 ; i < count; ) {
-        id expression = readNextExpression(s, &i, count);
+    for (start = 0, count = [s length]; start < count; ) {
+        id expression = readNextExpression();
         
         if (expression) {
             [a addObject:expression];
@@ -46,13 +47,13 @@ id readString(NSString *s)
     return [NSArray arrayWithArray:a];
 }
 
-NS_INLINE id readNextExpression(NSString *s, NSUInteger *start, NSUInteger count)
+NS_INLINE id readNextExpression()
 {    
-    for ( ; *start < count; ) {
-        unichar c = [s characterAtIndex:*start];
+    for ( ; start < count; ) {
+        unichar c = [s characterAtIndex:start];
         
         if (isWhitespace(c)) {
-            *start += 1;
+            start += 1;
             continue;
         }
         
@@ -68,21 +69,21 @@ NS_INLINE id readNextExpression(NSString *s, NSUInteger *start, NSUInteger count
             case '}':
                 RAISE_ERROR(READER_EXCEPTION, @"Unexpected delimeter %c", c);
             case '\'':
-                return readQuote(s, start, count);
+                return readQuote();
             case '`':
-                return readQuasiquote(s, start, count);
+                return readQuasiquote();
             case '~':
-                return readUnquote(s, start, count);
+                return readUnquote();
             case '"':
                 return nil;
             case ':':
-                return readKeyword(s, start, count);
+                return readKeyword();
             default:
                 if (isValidInitialNumberChar(c)) {
-                    return readNumber(s, start, count);
+                    return readNumber();
                 }
                 else {
-                    return readSymbol(s, start, count);
+                    return readSymbol();
                 }
         }
     }
@@ -90,63 +91,63 @@ NS_INLINE id readNextExpression(NSString *s, NSUInteger *start, NSUInteger count
     return nil;
 }
 
-NS_INLINE id readList(NSString *s, NSUInteger *start, NSUInteger count)
+NS_INLINE id readList()
 {    
     NSMutableArray *a = [NSMutableArray array];
     
-    for (*start += 1; *start < count; ) {
-        unichar c = [s characterAtIndex:*start];
+    for (start += 1; start < count; ) {
+        unichar c = [s characterAtIndex:start];
         
         if (isWhitespace(c)) {
-            *start += 1;
+            start += 1;
             continue;
         }
         else if (c == ')') {
-            *start += 1;
+            start += 1;
             break;
         }
         
-        [a addObject:readNextExpression(s, start, count)];
+        [a addObject:readNextExpression()];
     }
     
     return [PersistentList createFromArray:a];
 }
 
-NS_INLINE id readQuote(NSString *s, NSUInteger *start, NSUInteger count)
+NS_INLINE id readQuote()
 {
-    *start += 1;
+    start += 1;
     
-    id value = readNextExpression(s, start, count);
+    id value = readNextExpression();
     
     return [PersistentList createFromArray:[NSArray arrayWithObjects:QUOTE, value, nil]];
 }
 
-NS_INLINE id readQuasiquote(NSString *s, NSUInteger *start, NSUInteger count)
+NS_INLINE id readQuasiquote()
 {
-    *start += 1;
+    start += 1;
     
-    id value = readNextExpression(s, start, count);
+    id value = readNextExpression();
     
     return [PersistentList createFromArray:[NSArray arrayWithObjects:QUASIQUOTE, value, nil]];
 }
 
-NS_INLINE id readUnquote(NSString *s, NSUInteger *start, NSUInteger count)
+NS_INLINE id readUnquote()
 {
-    *start += 1;
+    start += 1;
     
-    id value = readNextExpression(s, start, count);
+    id value = readNextExpression();
     
     return [PersistentList createFromArray:[NSArray arrayWithObjects:UNQUOTE, value, nil]];
 }
 
-NS_INLINE id readKeyword(NSString *s, NSUInteger *start, NSUInteger count)
+NS_INLINE id readKeyword()
 {
     NSMutableString *a = [NSMutableString string];
     
-    *start += 1;
+    start += 1;
     
-    for ( ; *start < count; *start += 1) {
-        unichar c = [s characterAtIndex:*start];
+    for ( ; start < count; start += 1) {
+        unichar c = [s characterAtIndex:start];
         
         if (isInvalidSymbolChar(c)) {
             break;
@@ -158,12 +159,12 @@ NS_INLINE id readKeyword(NSString *s, NSUInteger *start, NSUInteger count)
     return [Keyword withName:[NSString stringWithString:a]];
 }
 
-NS_INLINE id readSymbol(NSString *s, NSUInteger *start, NSUInteger count)
+NS_INLINE id readSymbol()
 {
     NSMutableString *a = [NSMutableString string];
-        
-    for ( ; *start < count; *start += 1) {
-        unichar c = [s characterAtIndex:*start];
+    
+    for ( ; start < count; start += 1) {
+        unichar c = [s characterAtIndex:start];
         
         if (isInvalidSymbolChar(c)) {
             break;
@@ -184,45 +185,45 @@ NS_INLINE id readSymbol(NSString *s, NSUInteger *start, NSUInteger count)
         return [Symbol withName:[NSString stringWithString:a]];
 }
 
-NS_INLINE id readNumber(NSString *s, NSUInteger *start, NSUInteger count)
+NS_INLINE id readNumber()
 {
     NSMutableString *a = [NSMutableString string];
     
-    unichar first = [s characterAtIndex:*start];
-    unichar second = [s characterAtIndex:*start + 1];
+    unichar first = [s characterAtIndex:start];
+    unichar second = [s characterAtIndex:start + 1];
     
     switch (first) {
         case '-':
             if (isWhitespace(second)) {
-                *start += 1;
+                start += 1;
                 return [Symbol withName:@"-"];
             }
             else {
                 if (!isNumeric(second)) {
                     @throw [NSException exceptionWithName:@"ILLEGAL NUMBER CHARACTERS" reason:@"" userInfo:nil];
                 }
-                *start += 2;
+                start += 2;
                 [a appendString:[NSString stringWithCharacters:&first length:1]];
                 [a appendString:[NSString stringWithCharacters:&second length:1]];
                 break;
             }
         case '+':
             if (isWhitespace(second)) {
-                *start += 1;
+                start += 1;
                 return [Symbol withName:@"+"];
             }
             else {
                 if (!isNumeric(second)) {
                     @throw [NSException exceptionWithName:@"ILLEGAL NUMBER CHARACTERS" reason:@"" userInfo:nil];
                 }
-                *start += 2;
+                start += 2;
                 [a appendString:[NSString stringWithCharacters:&second length:1]];
                 break;
             }
     }
-            
-    for ( ; *start < count; *start += 1) {
-        unichar c = [s characterAtIndex:*start];
+    
+    for ( ; start < count; start += 1) {
+        unichar c = [s characterAtIndex:start];
         
         if (isWhitespace(c) || isValidEndDelimeter(c)) {
             break;
