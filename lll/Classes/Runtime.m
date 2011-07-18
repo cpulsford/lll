@@ -41,6 +41,14 @@
                              (if (seq s)                                  \
                                (cons (f (first s))                        \
                                      (map f (rest s)))))"];
+    
+    [self evaluateString:@"(defn filter                             \
+                             (f s)                                  \
+                             (if (seq s)                            \
+                               (let (e (f (first s)))               \
+                                 (if e                              \
+                                   (cons e (filter f (rest s)))     \
+                                   (filter f (rest s))))))"];
 }
 
 - (id)init
