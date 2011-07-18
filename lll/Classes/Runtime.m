@@ -16,10 +16,25 @@
     Scope *globalScope_;
 }
 
+- (void)dealloc
+{
+    [globalScope_ release];
+    
+    [super dealloc];
+}
+
+- (void)bootstrap
+{
+    [self evaluateString:@"(def cons (fn (x s) (static :RT :cons:withSeq: x s)))"];
+    [self evaluateString:@"(def conj (fn (s x) (static :RT :conj:withSeq: x s)))"];
+}
+
 - (id)init
 {
     if ((self = [super init])) {
         globalScope_ = [[Scope alloc] init];
+        
+        [self bootstrap];
     }
     
     return self;

@@ -10,6 +10,7 @@
 #import "PersistentList.h"
 #import "Scope.h"
 #import "Evaluator.h"
+#import "RT.h"
 
 @implementation Function
 {
