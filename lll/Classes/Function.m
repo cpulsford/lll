@@ -11,6 +11,7 @@
 #import "Scope.h"
 #import "Evaluator.h"
 #import "RT.h"
+#import "Symbol.h"
 
 @implementation Function
 {
@@ -28,6 +29,16 @@
     [body_ release];
     
     [super dealloc];
+}
+
+- (NSString *)description
+{
+    return [[PersistentList createFromArray:
+            [NSArray arrayWithObjects:
+             [Symbol withName:@"fn"]
+             ,args_
+             ,body_,
+             nil]] description];
 }
 
 - (id)initWithForm:(id <IPersistentList>)form shouldEvaluateArgs:(BOOL)evalArgs
