@@ -14,6 +14,7 @@
 #import "Symbol.h"
 #import "ObjectAdditions.h"
 #import "Function.h"
+#import "Equality.h"
 
 id <ISequence> evaluateQuasiquotedSeq(id <ISequence> seq, Scope *scope);
 
@@ -66,6 +67,16 @@ id evaluateAtom(id atom, Scope *scope)
     else if ([first isEqual:QUASIQUOTE]) {
         return evaluateQuasiquotedSeq([[s more] first], scope);
     }
+    else if ([first isEqual:IF]) {
+        NSArray *args = [[s more] reify];
+        
+        if ([Bool isTruthy:evaluateAtom([args objectAtIndex:0], scope)]) {
+            return evaluateAtom([args objectAtIndex:1], scope);
+        }
+        else {
+            return evaluateAtom([args objectAtIndex:2], scope);
+        }
+    }
     else if ([first isEqual:FN]) {
         return [Function fnWithForm:[s more] shouldEvaluateArgs:YES];
     }
@@ -89,7 +100,7 @@ id <ISequence> evaluateQuasiquotedSeq(id <ISequence> seq, Scope *scope)
 {
     id <ISequence> current;
     
-    NSMutableArray *retArray = [NSMutableArray arrayWithCapacity:[(id <ICounted>)seq count]];
+    NSMutableArray *retArray = [NSMutableArray arrayWithCapacity:[seq count]];
     
     for (current = seq ; [current seq]; current = [current more]) {
         id atom = [current first];
