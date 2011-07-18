@@ -11,12 +11,13 @@
 
 @interface Bool : NSObject
 - (id)initWithBool:(BOOL)val;
-- (const Bool *)equalsTrue; // these two would be for implementing true? false? might be factored out into RT eventually
-- (const Bool *)equalsFalse;
-+ (BOOL)isTruthy:(id)val; // these two are used to implement the if construct and return plain BOOLs
-+ (BOOL)isFalsey:(id)val;
 @end
 
 @interface Equality : NSObject
 + (const Bool *)areEqual:(id <ISequence>)objs;
 @end
+
+const Bool * isTrue(const Bool *b);
+const Bool * isFalse(const Bool *b);
+BOOL isTruthy(id val); // these two are for implementing the if form. falsey = nil || NSNull || false
+BOOL isFalsey(id val);

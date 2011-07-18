@@ -27,40 +27,9 @@
 {
     return value_ ? @"true" : @"false";
 }
-
-- (const Bool *)equalsTrue
-{
-    return self == T ? T : F;
-}
-
-- (const Bool *)equalsFalse
-{
-    return self == F ? T : F;
-}
-
-+ (BOOL)isTruthy:(id)val
-{
-    if (val == nil || val == NIL || val == F) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-+ (BOOL)isFalsey:(id)val
-{
-    if (val == nil || val == NIL || val == F) {
-        return YES;
-    }
-    
-    return NO;
-}
-
 @end
 
-
 @implementation Equality
-
 + (const Bool *)areEqual:(id <ISequence>)objs
 {
     NSArray *array = [objs reify];
@@ -79,5 +48,32 @@
     
     return T;
 }
-
 @end
+
+const Bool * isTrue(const Bool *b)
+{
+    return b == T ? T : F;
+}
+
+const Bool * isFalse(const Bool *b)
+{
+    return b == F ? T : F;
+}
+
+BOOL isTruthy(id val)
+{
+    if (val == nil || val == NIL || val == F) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+BOOL isFalsey(id val)
+{
+    if (val == nil || val == NIL || val == F) {
+        return YES;
+    }
+    
+    return NO;
+}

@@ -70,7 +70,7 @@ id evaluateAtom(id atom, Scope *scope)
     else if ([first isEqual:IF]) {
         NSArray *args = [[s more] reify];
         
-        if ([Bool isTruthy:evaluateAtom([args objectAtIndex:0], scope)]) {
+        if (isTruthy(evaluateAtom([args objectAtIndex:0], scope))) {
             return evaluateAtom([args objectAtIndex:1], scope);
         }
         else if ([args count] == 3){
