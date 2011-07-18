@@ -103,7 +103,7 @@ id evaluateAtom(id atom, Scope *scope)
     }
     else if ([first isEqual:DEF]) {
         NSArray *array = [[s more] reify];
-        [[Scope rootScope] setValue:evaluateAtom([array objectAtIndex:1], scope) forSymbol:[array objectAtIndex:0] allowOverwriting:YES];
+        [[scope rootScope] setValue:evaluateAtom([array objectAtIndex:1], scope) forSymbol:[array objectAtIndex:0] allowOverwriting:YES];
         
         return NIL;
     }

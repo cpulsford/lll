@@ -27,6 +27,8 @@
 
 + (Scope *)rootScope;
 
+- (Scope *)rootScope;
+
 - (id)valueForSymbol:(Symbol *)symbol;
 
 - (void)setValue:(id)value

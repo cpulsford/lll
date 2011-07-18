@@ -81,6 +81,11 @@ static Scope *GLOBAL;
     return GLOBAL;
 }
 
+- (Scope *)rootScope
+{
+    return [Scope rootScope];
+}
+
 - (id)valueForSymbol:(Symbol *)symbol
 {
     id retValue;
