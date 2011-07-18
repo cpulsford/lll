@@ -80,6 +80,21 @@ id evaluateAtom(id atom, Scope *scope)
             return NIL;
         }
     }
+    else if ([first isEqual:[Symbol withName:@"let"]]) {
+        NSArray *args = [[s more] reify];
+        
+        NSArray *letExprs = [[args objectAtIndex:0] reify];
+        
+        Scope *newScope = [Scope scopeWithParentScope:scope];
+        
+        NSUInteger i, count;
+        
+        for (i = 0, count = [letExprs count]; i < count; i += 2) {
+            [newScope setValue:evaluateAtom([letExprs objectAtIndex:i + 1], newScope) forSymbol:[letExprs objectAtIndex:i] allowOverwriting:YES];
+        }
+        
+        return evaluateAtom([args objectAtIndex:1], newScope);
+    }
     else if ([first isEqual:FN]) {
         return [Function fnWithForm:[s more] shouldEvaluateArgs:YES];
     }
