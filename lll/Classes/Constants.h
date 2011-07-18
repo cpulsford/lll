@@ -23,6 +23,7 @@ Symbol const *FN;
 Symbol const *MACRO;
 Symbol const *IF;
 Symbol const *DEF;
+Symbol const *LET;
 
 Symbol const *STATIC;
 Symbol const *INSTANCE;

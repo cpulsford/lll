@@ -80,7 +80,7 @@ id evaluateAtom(id atom, Scope *scope)
             return NIL;
         }
     }
-    else if ([first isEqual:[Symbol withName:@"let"]]) {
+    else if ([first isEqual:LET]) {
         NSArray *args = [[s more] reify];
         
         NSArray *letExprs = [[args objectAtIndex:0] reify];

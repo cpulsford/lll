@@ -23,6 +23,7 @@ Symbol const *FN;
 Symbol const *MACRO;
 Symbol const *IF;
 Symbol const *DEF;
+Symbol const *LET;
 
 Symbol const *STATIC;
 Symbol const *INSTANCE;
@@ -50,6 +51,7 @@ Class BOOL_CLASS;
     MACRO            = [[Symbol alloc] initWithName:@"macro"];
     IF               = [[Symbol alloc] initWithName:@"if"];
     DEF              = [[Symbol alloc] initWithName:@"def"];
+    LET              = [[Symbol alloc] initWithName:@"let"];
     STATIC           = [[Symbol alloc] initWithName:@"static"];
     INSTANCE         = [[Symbol alloc] initWithName:@"instance"];
     DO_ASSIGN        = [[Symbol alloc] initWithName:@"do-assign"];
