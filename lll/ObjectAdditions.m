@@ -27,10 +27,10 @@
     
     NSUInteger numberOfExpectedArguments = [ms numberOfArguments] - 2;
 	
-	if (numberOfExpectedArguments != [(id <ICounted>)arguments count]) {
+	if (numberOfExpectedArguments != [arguments count]) {
 		RAISE_ERROR(ARITY_EXCEPTION
                     ,@"gave %ld args to %@ but expected %ld"
-                    ,[(id <ICounted>)arguments count]
+                    ,[arguments count]
                     ,NSStringFromSelector(selector)
                     ,numberOfExpectedArguments);
 	}
