@@ -19,3 +19,5 @@
 #define READER_EXCEPTION               (@"Reader Exception")
 
 #define ARITY_EXCEPTION                (@"Arity Exception")
+
+#define INVALIDSYMBOLNAME_EXCEPTION    (@"Invalid Symbol Name")

@@ -7,6 +7,7 @@
 //
 
 #import "Symbol.h"
+#import "Exception.h"
 
 #define SYMBOL_HASH_OFFSET 1
 #define KEYWORD_HASH_OFFSET 1
@@ -41,9 +42,15 @@
 
 - (id)initWithName:(NSString *)name
 {
-    if ((self = [super init])) {
-        name_ = [name retain];
+    if ([name length]) {
+        if ((self = [super init])) {
+            name_ = [name retain];
+        } 
     }
+    else {
+        RAISE_ERROR(INVALIDSYMBOLNAME_EXCEPTION, @"Symbol or keyword length must not be 0");
+    }
+    
     
     return self;
 }

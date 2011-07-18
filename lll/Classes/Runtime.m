@@ -42,7 +42,7 @@
 
 - (id)evaluateString:(NSString *)s;
 {
-    return evaluateAtom([LispReader readString:s], globalScope_);
+    return evaluateAtom(readString(s), globalScope_);
 }
 
 - (id)evaluateAtom:(id <ISequence>)s
