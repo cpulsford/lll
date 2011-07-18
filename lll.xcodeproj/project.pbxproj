@@ -24,10 +24,15 @@
 		1E1D90E513CAC0150097DB51 /* Scope.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D90E413CAC0150097DB51 /* Scope.m */; };
 		1E22224B13CE9366004A263B /* LispReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E22224A13CE9366004A263B /* LispReader.m */; };
 		1E7ED63113CD4A6E0085A00B /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7ED63013CD4A6E0085A00B /* Utils.m */; };
+		1EC31F1F13D3990D005F8779 /* Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC31F1E13D3990D005F8779 /* Function.m */; };
+		1EC31F2213D3A730005F8779 /* Runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC31F2113D3A72F005F8779 /* Runtime.m */; };
+		1EC31F2513D3AD3B005F8779 /* RT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC31F2413D3AD3B005F8779 /* RT.m */; };
+		1EC31F2813D3B05D005F8779 /* Cons.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC31F2713D3B05D005F8779 /* Cons.m */; };
 		1EC7DA0213CF36F400443D6F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7D9FE13CF36F400443D6F /* Constants.m */; };
 		1EC7DA0313CF36F400443D6F /* Equality.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7DA0013CF36F400443D6F /* Equality.m */; };
 		1EC7DA0713CF3B4700443D6F /* NullAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7DA0613CF3B4700443D6F /* NullAdditions.m */; };
 		1EC7DA0C13CFC3B700443D6F /* ObjectAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7DA0B13CFC3B700443D6F /* ObjectAdditions.m */; };
+		1EC7DA0F13CFE51E00443D6F /* Evaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7DA0E13CFE51E00443D6F /* Evaluator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +82,14 @@
 		1E22224A13CE9366004A263B /* LispReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LispReader.m; path = Classes/LispReader.m; sourceTree = "<group>"; };
 		1E7ED62F13CD4A6E0085A00B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Classes/Utils.h; sourceTree = "<group>"; };
 		1E7ED63013CD4A6E0085A00B /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = Classes/Utils.m; sourceTree = "<group>"; };
+		1EC31F1D13D3990D005F8779 /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Function.h; path = Classes/Function.h; sourceTree = "<group>"; };
+		1EC31F1E13D3990D005F8779 /* Function.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Function.m; path = Classes/Function.m; sourceTree = "<group>"; };
+		1EC31F2013D3A72F005F8779 /* Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Runtime.h; path = Classes/Runtime.h; sourceTree = "<group>"; };
+		1EC31F2113D3A72F005F8779 /* Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Runtime.m; path = Classes/Runtime.m; sourceTree = "<group>"; };
+		1EC31F2313D3AD3B005F8779 /* RT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RT.h; path = Classes/RT.h; sourceTree = "<group>"; };
+		1EC31F2413D3AD3B005F8779 /* RT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RT.m; path = Classes/RT.m; sourceTree = "<group>"; };
+		1EC31F2613D3B05D005F8779 /* Cons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cons.h; path = Classes/Cons.h; sourceTree = "<group>"; };
+		1EC31F2713D3B05D005F8779 /* Cons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Cons.m; path = Classes/Cons.m; sourceTree = "<group>"; };
 		1EC7D9FD13CF36F400443D6F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Classes/Constants.h; sourceTree = "<group>"; };
 		1EC7D9FE13CF36F400443D6F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Classes/Constants.m; sourceTree = "<group>"; };
 		1EC7D9FF13CF36F400443D6F /* Equality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Equality.h; path = Classes/Equality.h; sourceTree = "<group>"; };
@@ -85,6 +98,8 @@
 		1EC7DA0613CF3B4700443D6F /* NullAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullAdditions.m; sourceTree = "<group>"; };
 		1EC7DA0A13CFC3B700443D6F /* ObjectAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectAdditions.h; sourceTree = "<group>"; };
 		1EC7DA0B13CFC3B700443D6F /* ObjectAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectAdditions.m; sourceTree = "<group>"; };
+		1EC7DA0D13CFE51D00443D6F /* Evaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Evaluator.h; path = Classes/Evaluator.h; sourceTree = "<group>"; };
+		1EC7DA0E13CFE51E00443D6F /* Evaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Evaluator.m; path = Classes/Evaluator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +223,14 @@
 				1E7ED63013CD4A6E0085A00B /* Utils.m */,
 				1E22224913CE9366004A263B /* LispReader.h */,
 				1E22224A13CE9366004A263B /* LispReader.m */,
+				1EC7DA0D13CFE51D00443D6F /* Evaluator.h */,
+				1EC7DA0E13CFE51E00443D6F /* Evaluator.m */,
+				1EC31F1D13D3990D005F8779 /* Function.h */,
+				1EC31F1E13D3990D005F8779 /* Function.m */,
+				1EC31F2013D3A72F005F8779 /* Runtime.h */,
+				1EC31F2113D3A72F005F8779 /* Runtime.m */,
+				1EC31F2313D3AD3B005F8779 /* RT.h */,
+				1EC31F2413D3AD3B005F8779 /* RT.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -220,6 +243,8 @@
 				1E1D90CA13CAA7910097DB51 /* AbstractSequence.m */,
 				1E1D90BE13CAA26B0097DB51 /* PersistentList.h */,
 				1E1D90BF13CAA26C0097DB51 /* PersistentList.m */,
+				1EC31F2613D3B05D005F8779 /* Cons.h */,
+				1EC31F2713D3B05D005F8779 /* Cons.m */,
 			);
 			name = "Data Structures";
 			sourceTree = "<group>";
@@ -366,6 +391,11 @@
 				1EC7DA0313CF36F400443D6F /* Equality.m in Sources */,
 				1EC7DA0713CF3B4700443D6F /* NullAdditions.m in Sources */,
 				1EC7DA0C13CFC3B700443D6F /* ObjectAdditions.m in Sources */,
+				1EC7DA0F13CFE51E00443D6F /* Evaluator.m in Sources */,
+				1EC31F1F13D3990D005F8779 /* Function.m in Sources */,
+				1EC31F2213D3A730005F8779 /* Runtime.m in Sources */,
+				1EC31F2513D3AD3B005F8779 /* RT.m in Sources */,
+				1EC31F2813D3B05D005F8779 /* Cons.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
