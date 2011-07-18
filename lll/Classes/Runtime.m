@@ -25,8 +25,14 @@
 
 - (void)bootstrap
 {
-    [self evaluateString:@"(def cons (fn (x s) (static :RT :cons:withSeq: x s)))"];
-    [self evaluateString:@"(def conj (fn (s x) (static :RT :conj:withSeq: x s)))"];
+    [self evaluateString:@"(def defn (macro (fname args body) `(def ~fname (fn ~args ~body))))"];
+    [self evaluateString:@"(defn cons (x s) (static :RT :cons:withSeq: x s))"];
+    [self evaluateString:@"(defn conj (s x) (static :RT :conj:withSeq: x s))"];
+    [self evaluateString:@"(defn conj (s x) (static :RT :conj:withSeq: x s))"];
+    [self evaluateString:@"(defn seq (s) (instance s :seq))"];
+    [self evaluateString:@"(defn count (s) (instance s :count))"];
+    [self evaluateString:@"(defn next (s) (instance s :next))"];
+    [self evaluateString:@"(defn rest (s) (instance s :more))"];
 }
 
 - (id)init
