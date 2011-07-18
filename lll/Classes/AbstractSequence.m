@@ -8,7 +8,7 @@
 
 #import "AbstractSequence.h"
 #import "PersistentList.h"
-#import "Utils.h"
+#import "Exception.h"
 
 @implementation AbstractSequence
 

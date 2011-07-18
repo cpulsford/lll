@@ -21,3 +21,5 @@
 #define ARITY_EXCEPTION                (@"Arity Exception")
 
 #define INVALIDSYMBOLNAME_EXCEPTION    (@"Invalid Symbol Name")
+
+#define unsupportedOperation {RAISE_ERROR(UNSUPPORTEDOPERATION_EXCEPTION, @"%s is not supported on an abstract sequence", __FUNCTION__);}
