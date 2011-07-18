@@ -26,4 +26,6 @@
 
 - (id <ISequence>)cons:(id)value;
 
+- (NSUInteger)count;
+
 @end

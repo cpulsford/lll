@@ -73,4 +73,9 @@
     unsupportedOperation;
 }
 
+- (NSUInteger)count
+{
+    unsupportedOperation;
+}
+
 @end
