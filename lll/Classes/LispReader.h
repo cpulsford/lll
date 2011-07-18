@@ -9,13 +9,3 @@
 #import <Foundation/Foundation.h>
 
 id readString(NSString *s);
-
-// FIX ME, something is definitely broken. CLosing brackets aren't looked for properly I think...
-
-@interface LispReader : NSObject
-
-+ (id)readString:(NSString *)s;
-
-+ (id)readString:(NSString *)s fromStartPosition:(NSUInteger)x;
-
-@end
