@@ -12,5 +12,9 @@
 @protocol ISequence;
 
 @interface Cons : AbstractSequence <ISequence>
+
 + (Cons *)consWithFirst:(id)obj andRest:(id <ISequence>)rest;
+
+- (NSUInteger)count;
+
 @end

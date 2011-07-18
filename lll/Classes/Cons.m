@@ -51,5 +51,9 @@
     return [Cons consWithFirst:value andRest:self];
 }
 
+- (NSUInteger)count
+{
+    return rest_ ? 1 + [rest_ count] : 1;
+}
 
 @end
