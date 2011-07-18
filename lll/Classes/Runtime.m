@@ -26,14 +26,21 @@
 - (void)bootstrap
 {
     [self evaluateString:@"(def defn (macro (fname args body) `(def ~fname (fn ~args ~body))))"];
+    [self evaluateString:@"(def defmacro (macro (fname args body) `(def ~fname (macro ~args ~body))))"];
     [self evaluateString:@"(defn cons (x s) (static :RT :cons:withSeq: x s))"];
     [self evaluateString:@"(defn conj (s x) (static :RT :conj:withSeq: x s))"];
     [self evaluateString:@"(defn conj (s x) (static :RT :conj:withSeq: x s))"];
     [self evaluateString:@"(defn seq (s) (instance s :seq))"];
     [self evaluateString:@"(defn count (s) (instance s :count))"];
+    [self evaluateString:@"(defn first (s) (instance s :first))"];
     [self evaluateString:@"(defn next (s) (instance s :next))"];
     [self evaluateString:@"(defn rest (s) (instance s :more))"];
     [self evaluateString:@"(defn ? (expr) (if expr true false))"];
+    [self evaluateString:@"(defmacro when-let (binding form) `(let ~binding (if (first ~'binding) ~form)))"];
+    [self evaluateString:@"(defn map (f s)                                \
+                             (if (seq s)                                  \
+                               (cons (f (first s))                        \
+                                     (map f (rest s)))))"];
 }
 
 - (id)init
