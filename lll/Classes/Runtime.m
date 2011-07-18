@@ -33,6 +33,7 @@
     [self evaluateString:@"(defn count (s) (instance s :count))"];
     [self evaluateString:@"(defn next (s) (instance s :next))"];
     [self evaluateString:@"(defn rest (s) (instance s :more))"];
+    [self evaluateString:@"(defn ? (expr) (if expr true false))"];
 }
 
 - (id)init

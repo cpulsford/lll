@@ -73,8 +73,11 @@ id evaluateAtom(id atom, Scope *scope)
         if ([Bool isTruthy:evaluateAtom([args objectAtIndex:0], scope)]) {
             return evaluateAtom([args objectAtIndex:1], scope);
         }
-        else {
+        else if ([args count] == 3){
             return evaluateAtom([args objectAtIndex:2], scope);
+        }
+        else {
+            return NIL;
         }
     }
     else if ([first isEqual:FN]) {
