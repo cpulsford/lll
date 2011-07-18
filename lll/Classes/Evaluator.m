@@ -15,6 +15,8 @@
 #import "ObjectAdditions.h"
 #import "Function.h"
 
+id <ISequence> evaluateQuasiquotedSeq(id <ISequence> seq, Scope *scope);
+
 id evaluateAtom(id atom, Scope *scope)
 {
     Class atomClass = [atom class];
@@ -61,6 +63,9 @@ id evaluateAtom(id atom, Scope *scope)
     else if ([first isEqual:UNQUOTE]) {
         return evaluateAtom([[s more] first], scope);
     }
+    else if ([first isEqual:QUASIQUOTE]) {
+        return evaluateQuasiquotedSeq([[s more] first], scope);
+    }
     else if ([first isEqual:FN]) {
         return [Function fnWithForm:[s more] shouldEvaluateArgs:YES];
     }
@@ -69,7 +74,7 @@ id evaluateAtom(id atom, Scope *scope)
     }
     else if ([first isEqual:DEF]) {
         NSArray *array = [[s more] reify];
-        [scope setValue:evaluateAtom([array objectAtIndex:1], scope) forSymbol:[array objectAtIndex:0] allowOverwriting:YES];
+        [[Scope rootScope] setValue:evaluateAtom([array objectAtIndex:1], scope) forSymbol:[array objectAtIndex:0] allowOverwriting:YES];
         
         return NIL;
     }
@@ -78,4 +83,29 @@ id evaluateAtom(id atom, Scope *scope)
         
         return [f invokeWithArgs:[s more] withinScope:scope];
     }
+}
+
+id <ISequence> evaluateQuasiquotedSeq(id <ISequence> seq, Scope *scope)
+{
+    id <ISequence> current;
+    
+    NSMutableArray *retArray = [NSMutableArray arrayWithCapacity:[(id <ICounted>)seq count]];
+    
+    for (current = seq ; [current seq]; current = [current more]) {
+        id atom = [current first];
+        
+        if ([atom conformsToProtocol:@protocol(IPersistentList)]) {
+            if ([[atom first] isEqual:UNQUOTE]) {
+                [retArray addObject:evaluateAtom([[atom more] first], scope)];
+            }
+            else {
+                [retArray addObject:evaluateQuasiquotedSeq(atom, scope)];
+            }
+        }
+        else {
+            [retArray addObject:atom];
+        }
+    }
+    
+    return [PersistentList createFromArray:retArray];
 }

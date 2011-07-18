@@ -32,7 +32,7 @@
 - (id)init
 {
     if ((self = [super init])) {
-        globalScope_ = [[Scope alloc] init];
+        globalScope_ = [[Scope rootScope] retain];
         
         [self bootstrap];
     }
@@ -42,7 +42,7 @@
 
 - (id)evaluateString:(NSString *)s;
 {
-    return evaluateAtom(readString(s), globalScope_);
+    return evaluateAtom([readString(s) objectAtIndex:0], globalScope_);
 }
 
 - (id)evaluateAtom:(id <ISequence>)s

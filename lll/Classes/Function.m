@@ -56,12 +56,17 @@
         Symbol *name = [cp first];
         id value = shouldEvaluateArgs_ ? evaluateAtom([ca first], newScope) : [ca first];
         
-        if (shouldEvaluateArgs_) {
-            [newScope setValue:value forSymbol:name allowOverwriting:YES];
-        }
+        [newScope setValue:value forSymbol:name allowOverwriting:YES];
     }
     
-    return evaluateAtom(body_, newScope);
+    id value = evaluateAtom(body_, newScope);
+    
+    if (shouldEvaluateArgs_) {
+        return value;
+    }
+    else {
+        return evaluateAtom(value, newScope);
+    }
 }
 
 @end
