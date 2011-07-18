@@ -15,6 +15,7 @@
 NS_INLINE BOOL isWhitespace(unichar c);
 NS_INLINE BOOL isNumeric(unichar c);
 NS_INLINE BOOL isInvalidSymbolChar(unichar c);
+NS_INLINE BOOL isValidInitialNumberChar(unichar c);
 NS_INLINE BOOL isValidEndDelimeter(unichar c);
 
 NS_INLINE id readNextExpression(NSString *s, NSUInteger *start, NSUInteger count);
@@ -77,7 +78,7 @@ NS_INLINE id readNextExpression(NSString *s, NSUInteger *start, NSUInteger count
             case ':':
                 return readKeyword(s, start, count);
             default:
-                if (isNumeric(c)) {
+                if (isValidInitialNumberChar(c)) {
                     return readNumber(s, start, count);
                 }
                 else {
@@ -279,6 +280,27 @@ NS_INLINE BOOL isInvalidSymbolChar(unichar c)
         case '\'':
         case '`':
         case '~':
+            return YES;
+        default:
+            return NO;
+    }
+}
+
+NS_INLINE BOOL isValidInitialNumberChar(unichar c)
+{
+    switch (c) {
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case '-':
+        case '+':
             return YES;
         default:
             return NO;
