@@ -22,6 +22,10 @@ int main(int argc, char *argv[])
     
     Runtime *rt = [[[Runtime alloc] init] autorelease];
     
+    PersistentList *p = readString(@"```''`'`'`'(:hello ''''''(world))");
+    
+    NSLog(@"%@", [rt evaluateAtom:p]);
+        
     NSLog(@"%@", [rt evaluateString:@"(cons 1 '())"]);
     
     NSLog(@"%@", [rt evaluateString:@"(? (count '()))"]);
@@ -37,30 +41,7 @@ int main(int argc, char *argv[])
     
     NSLog(@"%@", [rt evaluateString:@"(filter seq '((1 2 3) (4 5 6) () (7 8 9)))"]);
     
-    PersistentList *pl = [readString(@"(map (fn (x) (cons x '())) '(1 2 3))")objectAtIndex:0];
-    
-    NSLog(@"%@", [rt evaluateString:@"(map (fn (x) (cons x '())) '(1 2 3))"]);
-    
-    NSUInteger i;
-    
-    for (i = 0; i < 1000; i++) {
-        [rt evaluateAtom:pl];
-    }
-
-    NSLog(@"%@", [rt evaluateString:@"(map (fn (x) (cons x '())) '(1 2 3))"]);
-    for (i = 0; i < 1000; i++) {
-        [rt evaluateAtom:pl];
-    }
-    
-    NSLog(@"%@", [rt evaluateString:@"(map (fn (x) (cons x '())) '(1 2 3))"]);
-    for (i = 0; i < 1000; i++) {
-        [rt evaluateAtom:pl];
-    }
-    
-    NSLog(@"%@", [rt evaluateString:@"(map (fn (x) (cons x '())) '(1 2 3))"]);
-    for (i = 0; i < 1000; i++) {
-        [rt evaluateAtom:pl];
-    }
+    PersistentList *pl = [readString(@"(map (fn (x) (cons x '())) '(1 2 3))") objectAtIndex:0];
     
     NSLog(@"%@", [rt evaluateString:@"(map (fn (x) (cons x '())) '(1 2 3))"]);
     
